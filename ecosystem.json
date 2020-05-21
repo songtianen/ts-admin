@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "AU-admin",
+      "script": "./server/server.js",
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": ["47.108.85.34"],
+      "repo": "git@gitee.com:soten/AU-admin.git",
+      "ref": "origin/master",
+      "path": "/root/au-app",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env production",
+      "evn": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
