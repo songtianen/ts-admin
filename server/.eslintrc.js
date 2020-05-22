@@ -1,18 +1,7 @@
-{
-  "root": true,
-  "parser": "babel-eslint",
-  "extends": ["airbnb"],
-  "plugins": [
-    "react",
-    "prettier"
-  ],
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
-  },
-  "rules": {
+module.exports = {
+  rules: {
     "prettier/prettier": "error",
+    "@typescript-eslint/no-var-requires":[0],
     "camelcase": [0],
     "global-require": [0],
     "import/no-extraneous-dependencies": [0],

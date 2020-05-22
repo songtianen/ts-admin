@@ -26,7 +26,7 @@ const webpackDevConfig = merge(baseWebpackConfig, {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:6666',
+        target: 'http://localhost:6667',
         changeOrigin: true,
         // 根据后端是否提供 ‘/api’ 来确定
         // pathRewrite: { '^/api': '' },
@@ -48,7 +48,7 @@ const webpackDevConfig = merge(baseWebpackConfig, {
       {
         // loader编译之前，去验证
         enforce: 'pre',
-        test: /\.(js|ts)$/,
+        test: /\.(js|ts|tsx)$/,
         loader: 'eslint-loader',
         // 排除
         exclude: path.resolve(__dirname, '../node_modules'),

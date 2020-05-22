@@ -1,11 +1,7 @@
-/* eslint-disable prefer-const */
-/* eslint-disable import/no-unresolved */
 const qiniu = require('qiniu');
 const fs = require('fs');
 const path = require('path');
-
 const cdnConfig = require('../app.config').cdn;
-
 // 声明 定义不许要上传cdn的文件
 const excludeFiles = ['index.html'];
 

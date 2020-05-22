@@ -8,7 +8,7 @@ const router = require('./routes/index.js');
 // const expressStaticGzip = require('express-static-gzip');
 
 const isEnv = process.env.NODE_ENV;
-const PORT = isEnv === 'production' ? 8888 : 6666;
+const PORT = isEnv === 'production' ? 8889 : 6667;
 const app = express();
 app.use(compression()); // 注册资源压缩的中间件
 app.use(bodyParser.json()); // 请求体 json格式的数据转换成 req.body 格式的数据
