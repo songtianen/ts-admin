@@ -1,39 +1,48 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, SagaReturnType } from 'redux-saga/effects';
 import { notification } from 'antd';
-import { getAccessMenu, getUserInfo } from '../../../../api';
-import { actionTypes, initAppDataSuccessAction } from '../actions/actions';
-import util from '../../../../util/util';
+import { getAccessMenu, getUserInfo } from '../../../../../api';
+import {
+  initAppDataSuccessAction,
+  UPDATE_MODULE_SUCCESS,
+  DO_UPDATE_MODULE,
+  DO_INIT_APPDATA,
+  ILayOutActionsType,
+} from '../actions/actions';
+import util from '../../../../../util/util';
+import { SagaIterator } from 'redux-saga';
+import { AxiosPromise } from 'axios';
+
 // 不需要后端返回的菜单
 // import constantMenu from '../../../../conf/menuConf';
 
-function* initAppData(action) {
+function* initAppData(action: ILayOutActionsType): SagaReturnType<any> {
   const pathName = action.payload;
   // console.log('init_APP_data_pathName', pathName);
-  let theme = localStorage.getItem('theme') || 'light';
+  const theme = localStorage.getItem('theme') || 'light';
 
   try {
     // const userInfo = yield call(getUserInfo, '');
     // const accessMenu = yield call(getAccessMenu, '');
-    let [accessMenu, userInfo] = yield Promise.all([
+    const [accessMenu, userInfo] = yield Promise.all([
       getAccessMenu(),
       getUserInfo(),
     ]);
     if (userInfo.statusCode === 200 && accessMenu.statusCode === 200) {
       localStorage.setItem('accessMenu', JSON.stringify(accessMenu.data));
-      let menuRes = accessMenu.data;
+      const menuRes = accessMenu.data;
       // menuRes.push(...constantMenu); // 添加不需要后端返回的菜单列表
       // let moduleList = menuRes.filter((item) => {
       //   // 是左侧菜单(leftMenu字段控制是否显示此菜单)
       //   return item.leftMenu;
       // });
       // let menus = JSON.parse(JSON.stringify(menuRes));
-      let findModule = util.findCurrentMenuNameAndModule(menuRes, pathName);
-      let siderModuleMenu = JSON.parse(JSON.stringify(findModule.children));
-      let siderData = util.findSiderComponentSelectedNameAndOpenKeys(
+      const findModule = util.findCurrentMenuNameAndModule(menuRes, pathName);
+      const siderModuleMenu = JSON.parse(JSON.stringify(findModule.children));
+      const siderData = util.findSiderComponentSelectedNameAndOpenKeys(
         siderModuleMenu,
         pathName,
       ); // 查找的Sider组件需要的key和openKeys
-      let accessMenuData = {
+      const accessMenuData = {
         headerCurrentModuleName: findModule.name, // header组件数据,当前选中的菜单
         // accessMenu: menuRes, // 所有菜单
         siderModuleMenu: findModule.children, // sider左侧菜单数据，(由header组件的menu改变)
@@ -43,8 +52,8 @@ function* initAppData(action) {
         theme,
       };
       // userInfo---
-      let isAdmin = userInfo.data.isAdmin;
-      let userInfoData = {
+      const isAdmin = userInfo.data.isAdmin;
+      const userInfoData = {
         // 用户信息
         name: userInfo.data.userName,
         avatar: userInfo.data.avatarUrl,
@@ -58,7 +67,7 @@ function* initAppData(action) {
         JSON.stringify(userInfo.data.userPermission),
       );
       localStorage.setItem('isAdmin', userInfo.data.isAdmin);
-      let appData = {
+      const appData = {
         ...userInfoData,
         ...accessMenuData,
       };
@@ -71,25 +80,25 @@ function* initAppData(action) {
         message: '没有请求用户信息的权限',
       });
     }
-    console.log('初始化失败', error);
+    console.log('初始化失败', error.message);
   }
 }
 
-function* updateModule(action) {
+function* updateModule(action: ILayOutActionsType) {
   // console.log('请求菜单-updateModule', action);
   // 异步在这里做一些事情
   yield put({
-    type: actionTypes.UPDATE_MODULE_SUCCESS,
+    type: UPDATE_MODULE_SUCCESS,
     payload: action.payload,
   });
 }
 
 function* watchUpdateModule() {
-  yield takeEvery(actionTypes.DO_UPDATE_MODULE, updateModule);
+  yield takeEvery(DO_UPDATE_MODULE, updateModule);
 }
 
 function* watchInitAppData() {
-  yield takeEvery(actionTypes.DO_INIT_APPDATA, initAppData);
+  yield takeEvery(DO_INIT_APPDATA, initAppData);
 }
 
 export const appSagas = [watchUpdateModule(), watchInitAppData()];

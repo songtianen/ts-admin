@@ -100,7 +100,7 @@ export const getUserInfoAction = (data: any): getUserInfoAction => {
   return { type: DO_GET_USERINFO, payload: data };
 };
 
-export type LayOutActionsType =
+export type ILayOutActionsType =
   | getAccessMenuAction
   | getAccessMenuSuccessAction
   | updateModuleAction
