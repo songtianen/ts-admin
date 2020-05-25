@@ -1,13 +1,13 @@
 import {
-  ILayOutActionsType,
+  ILayOutActionsTypes,
   UPDATE_ACCESSMENU_SUCCESS,
   INIT_APPDATA_SUCCESS,
   UPDATE_MODULE_SUCCESS,
   GET_USERINFO_SUCCESS,
 } from '../actions/actions';
-import { IAppState } from '../types';
+import { IReduxAppState } from '../types';
 
-const initialState: IAppState = {
+const initialState: IReduxAppState = {
   name: '',
   avatar: '',
   isAdmin: '',
@@ -24,7 +24,7 @@ const initialState: IAppState = {
   siderModuleMenu: [], // 模块菜单
 };
 
-export default function app(state = initialState, action: ILayOutActionsType) {
+export default function app(state = initialState, action: ILayOutActionsTypes) {
   switch (action.type) {
     case UPDATE_ACCESSMENU_SUCCESS:
       return {

@@ -5,7 +5,7 @@ import { getToken, removeToken } from './token';
 // import loading from './loading';
 import permission from './permission';
 
-let history = createBrowserHistory({
+const history = createBrowserHistory({
   forceRefresh: true,
 });
 /*
@@ -17,10 +17,8 @@ let history = createBrowserHistory({
   WEBPACK_ENV由webpack.DefinePlugin()中定义
 */
 const service = axios.create({
-  baseURL:
-    // eslint-disable-next-line no-undef
-    WEBPACK_ENV === 'development' ? '/api' : '/api', // 后端启用nginx代理,
   // eslint-disable-next-line no-undef
+  baseURL: WEBPACK_ENV === 'development' ? '/api' : '/api', // 后端启用nginx代理,
   // WEBPACK_ENV === 'development' ? '/api' : 'http://localhost:8888/api', // 测试用（npm run build-server）,
   timeout: 20000,
   withCredentials: true,
@@ -34,10 +32,10 @@ service.interceptors.request.use(
       return Promise.reject(new Error('403'));
     }
     // loading.show(config);
-    let token = getToken();
+    const token = getToken();
     // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

@@ -1,0 +1,32 @@
+.login-wrap {
+  width: 100%;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  background-color: #DEFFFF;
+  align-items: center;
+}
+.login-wrap .login-item-box {
+  min-width: 280px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-sizing: content-box;
+  z-index: 100;
+  padding: 10px;
+}
+.login-wrap .login-item-box:hover {
+  box-shadow: 0px 0px 4px #ccc;
+  border: none;
+}
+.login-wrap .login-item-box .logo-img {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 20px;
+}
+.login-wrap .login-item-box .login-bottom .login-rigster-btn {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.login-wrap .login-item-box .login-bottom .login-rigster-meta {
+  margin-top: 20px;
+}

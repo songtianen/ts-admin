@@ -63,13 +63,15 @@ const webpackDevConfig = merge(baseWebpackConfig, {
         exclude: path.resolve(__dirname, '../node_modules'),
       },
       {
-        test: /\.(less|css)$/,
+        test: /\.less$/,
         use: [
           // { loader: 'style-loader' },
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          { loader: 'css-loader' },
+          {
+            loader: 'css-loader',
+          },
           {
             loader: 'postcss-loader',
             options: {

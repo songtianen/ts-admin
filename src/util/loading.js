@@ -1,5 +1,8 @@
+/* eslint-disable import/extensions */
+/* eslint-disable @typescript-eslint/no-implied-eval */
 import { message } from 'antd';
 import store from '../store';
+// eslint-disable-next-line import/no-unresolved
 import Spin from '../views/layout/Spin';
 
 const loading = {};
@@ -11,8 +14,8 @@ let lastRequest = new Date('2018');
 
 loading.show = function (config) {
   if (config && config.loading) {
-    let now = new Date();
-    let ms = now - lastRequest;
+    const now = new Date();
+    const ms = now - lastRequest;
     lastRequest = now;
     if (ms > 2000) {
       if (config.loading === 'message') {

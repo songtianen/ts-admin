@@ -1,15 +1,22 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Layout } from 'antd';
+import { Dispatch } from 'redux';
+import { RouteChildrenProps } from 'react-router-dom';
 import { getToken } from '../../../util/token';
 import util from '../../../util/util';
-import { Layout } from 'antd';
 import MySider from '../Sider';
 import MyHeader from '../Header';
 import MyNavTabs from '../Content';
 import Footer from '../Footer';
 import reduxApp from './redux';
-import { Dispatch } from 'redux';
-import { RouteChildrenProps } from 'react-router-dom';
+import { IReduxState } from '../../../redux/types';
 
 const { Content } = Layout;
 const { initAppDataAction, updateModuleAction } = reduxApp.actions;
@@ -19,7 +26,7 @@ export interface IProps extends RouteChildrenProps {
   siderModuleMenu: [];
   siderOpenKeys: [];
 }
-export interface IState {
+export interface ILayoutState {
   collapsed: boolean;
   responsive: boolean;
   navTabShow: boolean;
@@ -27,8 +34,8 @@ export interface IState {
   layOutHeight: number | null;
 }
 
-class MyLayout extends React.PureComponent<IProps, IState> {
-  state: IState = {
+class MyLayout extends React.PureComponent<IProps, ILayoutState> {
+  state: ILayoutState = {
     collapsed: false,
     responsive: false,
     navTabShow: true,
@@ -81,8 +88,8 @@ class MyLayout extends React.PureComponent<IProps, IState> {
 
   // 获取当前浏览器宽度并设置responsive管理响应式
   getClientWidth = (): void => {
-    const clientWidth = document.body.clientWidth;
-    const clientHeight = document.body.clientHeight;
+    const { clientWidth } = document.body;
+    const { clientHeight } = document.body;
 
     this.setState({
       responsive: clientWidth <= 991,
@@ -135,7 +142,9 @@ class MyLayout extends React.PureComponent<IProps, IState> {
     const { dispatch, location } = this.props;
     dispatch(initAppDataAction(location.pathname));
   };
+
   public render() {
+    console.log('Layout-Render');
     const { siderModuleMenu } = this.props;
     return (
       <Layout>
@@ -176,7 +185,7 @@ class MyLayout extends React.PureComponent<IProps, IState> {
   }
 }
 
-const mapState2Props = (state: any) => {
+const mapState2Props = (state: IReduxState) => {
   const {
     name,
     siderModuleMenu,

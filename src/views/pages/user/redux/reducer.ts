@@ -1,17 +1,22 @@
-import { actionTypes } from './actions';
+import {
+  ILoginActionsTypes,
+  BEFORE_LOGIN,
+  LOGIN_SUCCESS,
+  REGISTER_SUCCESS,
+  LOGIN_ERROR,
+  LOGOUT_SUCCESS,
+} from './actions';
+import { IReduxLoginState } from './types';
 
 // import * as common from "../../redux/constants"; // 公共状态
-
-export default function (state, action) {
-  if (!state) {
-    state = {
-      isLogin: false,
-      error: '',
-      isLogout: false,
-    };
-  }
+const initialState: IReduxLoginState = {
+  isLogin: false,
+  error: '',
+  isLogout: false,
+};
+export default function (state = initialState, action: ILoginActionsTypes) {
   switch (action.type) {
-    case actionTypes.BEFORE_LOGIN:
+    case BEFORE_LOGIN:
       // 获取用户信息
       // console.log('BEFORE_LOGIN', state);
       return {
@@ -19,28 +24,28 @@ export default function (state, action) {
         isLogin: false,
         error: '',
       };
-    case actionTypes.LOGIN_SUCCESS:
+    case LOGIN_SUCCESS:
       // 获取用户信息
       return {
         ...state,
         ...action.payload.data,
         isLogout: false,
       };
-    case actionTypes.REGISTER_SUCCESS:
+    case REGISTER_SUCCESS:
       return {
         ...state,
         ...action.payload.data,
         isLogin: true,
         isLogout: false,
       };
-    case actionTypes.LOGIN_ERROR:
+    case LOGIN_ERROR:
       // 登出
       return {
         ...state,
         ...action.payload,
         error: action.payload.msg,
       };
-    case actionTypes.LOGOUT_SUCCESS:
+    case LOGOUT_SUCCESS:
       // 登出
       return {
         ...state,

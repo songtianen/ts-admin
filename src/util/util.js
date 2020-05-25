@@ -1,11 +1,14 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-restricted-syntax */
 import React from 'react';
 import { Icon, Tag } from 'antd';
 
 const getMenuByName = (name, menulist) => {
   let menu = {};
   // eslint-disable-next-line no-shadow
-  let forFn = function (name, menulist) {
-    for (let item of menulist) {
+  const forFn = function (name, menulist) {
+    for (const item of menulist) {
       if (item.name === name) {
         menu = item;
       } else if (item.children && item.children.length > 0) {
@@ -22,8 +25,8 @@ const getMenuByName = (name, menulist) => {
 const getTreeEleByPropertyValue = (value, property, list) => {
   let ele = {};
   // eslint-disable-next-line no-shadow
-  let forFn = function (value, property, list) {
-    for (let item of list) {
+  const forFn = function (value, property, list) {
+    for (const item of list) {
       if (item[property] === value) {
         ele = item;
       } else if (item.children && item.children.length > 0) {
@@ -44,9 +47,9 @@ const oneOf = (ele, targetArr) => {
   return false;
 };
 const getParentMenusByName = (openAccesseMenu, name) => {
-  let temp = [];
-  let forFn = function (Menu, _name) {
-    for (let item of Menu) {
+  const temp = [];
+  const forFn = function (Menu, _name) {
+    for (const item of Menu) {
       if (item.name === _name && item.path !== '/') {
         temp.push(item);
         forFn(openAccesseMenu, item.parentName);
@@ -59,9 +62,9 @@ const getParentMenusByName = (openAccesseMenu, name) => {
 };
 // 打开的菜单
 const openAccesseMenu = (accesseMenu) => {
-  let accesseMenus = [];
-  let forFn = function (menulist, parentName) {
-    for (let item of menulist) {
+  const accesseMenus = [];
+  const forFn = function (menulist, parentName) {
+    for (const item of menulist) {
       // 添加parentName属性
       item.parentName = parentName;
       accesseMenus.push(item);
@@ -74,12 +77,12 @@ const openAccesseMenu = (accesseMenu) => {
   return accesseMenus;
 };
 const getTreeEleWithParent = (id, list) => {
-  let temp = [];
+  const temp = [];
   // eslint-disable-next-line no-shadow
-  let forFn = function (id, list) {
-    for (let item of list) {
+  const forFn = function (id, list) {
+    for (const item of list) {
       if (item.id === id) {
-        let newItem = { ...item };
+        const newItem = { ...item };
         temp.push(newItem);
         forFn(item.parentId, list);
       }
@@ -93,10 +96,10 @@ const handleTitle = (vm, item) => {
   return item.title;
 };
 const openTreeData = (data) => {
-  let Menu = [];
+  const Menu = [];
   // eslint-disable-next-line no-shadow
-  let forFn = function (data) {
-    for (let item of data) {
+  const forFn = function (data) {
+    for (const item of data) {
       Menu.push({ ...item });
       if (item.children && item.children.length > 0) {
         forFn(item.children);
@@ -253,7 +256,7 @@ const findSiderComponentSelectedNameAndOpenKeys = (menuLists, pathName) => {
   let pathNameItem = '';
 
   const findSiderItem = (menu, _name) => {
-    for (let i of menu) {
+    for (const i of menu) {
       if (i.path === _name) {
         pathNameItem = {
           ...i,
@@ -270,9 +273,9 @@ const findSiderComponentSelectedNameAndOpenKeys = (menuLists, pathName) => {
   // 找到多个父级
   const findOpenKeys = (list, currentId) => {
     let upperId;
-    let siderOpenKeys = [];
+    const siderOpenKeys = [];
     const findUpper = (menu, _id) => {
-      for (let i of menu) {
+      for (const i of menu) {
         if (i.id === _id) {
           upperId = i.parentId;
           siderOpenKeys.push(i.name);
@@ -298,9 +301,9 @@ const findSiderComponentSelectedNameAndOpenKeys = (menuLists, pathName) => {
   };
 };
 const findInModuleList = (list, listKey, name) => {
-  let result = [];
+  const result = [];
   const find = (data, key, _name) => {
-    for (let i of data) {
+    for (const i of data) {
       if (i[key] === _name) {
         result.push(i);
       }
@@ -314,7 +317,7 @@ const findInModuleList = (list, listKey, name) => {
 };
 // 合并所有菜单
 const accessMenuTree = (menus) => {
-  let rootMenu = menus.filter((v) => {
+  const rootMenu = menus.filter((v) => {
     return v.parentId === '0';
   });
   const build = (listItem, allList) => {
@@ -322,7 +325,7 @@ const accessMenuTree = (menus) => {
       listItem[i].key = listItem[i].id;
       listItem[i].value = listItem[i].id;
       listItem[i].children = [];
-      let children = allList.filter((item) => {
+      const children = allList.filter((item) => {
         return item.parentId === listItem[i].id;
       });
       listItem[i].children.push(...children);
@@ -355,8 +358,8 @@ export default {
 };
 
 export function formatDateTime(inputTime) {
-  let date = new Date(inputTime);
-  let y = date.getFullYear();
+  const date = new Date(inputTime);
+  const y = date.getFullYear();
   let m = date.getMonth() + 1;
   m = m < 10 ? `0${m}` : m;
   let d = date.getDate();

@@ -34,7 +34,7 @@ const webpackProdConfig = merge(baseWebpackConfig, {
         exclude: path.resolve(__dirname, '../node_modules'),
       },
       {
-        test: /\.(less|css)$/,
+        test: /\.less$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,

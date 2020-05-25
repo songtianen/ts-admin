@@ -10,7 +10,11 @@ export function resetdb(data) {
   });
 }
 
-export function loginByUsername(data) {
+export interface IRequestLoginByUsernameData {
+  username: string;
+  password: string;
+}
+export function loginByUsername(data: IRequestLoginByUsernameData) {
   return request({
     url: '/user/login',
     method: 'post',

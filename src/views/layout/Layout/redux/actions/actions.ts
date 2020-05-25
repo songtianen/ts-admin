@@ -19,94 +19,94 @@ export type DO_INIT_APPDATA = typeof DO_INIT_APPDATA;
 export type INIT_APPDATA_SUCCESS = typeof INIT_APPDATA_SUCCESS;
 
 // Actions
-export interface getAccessMenuAction {
+export interface IGetAccessMenuAction {
   payload: any;
   type: DO_UPDATE_ACCESSMENU;
 }
-export const getAccessMenuAction = (data: any): getAccessMenuAction => {
+export const getAccessMenuAction = (data: any): IGetAccessMenuAction => {
   return { type: DO_UPDATE_ACCESSMENU, payload: data };
 };
 // Actions
-export interface getAccessMenuSuccessAction {
+export interface IGetAccessMenuSuccessAction {
   payload: any;
   type: UPDATE_ACCESSMENU_SUCCESS;
 }
 export const getAccessMenuSuccessAction = (
   data: any,
-): getAccessMenuSuccessAction => {
+): IGetAccessMenuSuccessAction => {
   return { type: UPDATE_ACCESSMENU_SUCCESS, payload: data };
 };
 // ---
 // Actions
-export interface updateModuleAction {
+export interface IUpdateModuleAction {
   payload: any;
   type: DO_UPDATE_MODULE;
 }
-export const updateModuleAction = (data: any): updateModuleAction => {
+export const updateModuleAction = (data: any): IUpdateModuleAction => {
   return { type: DO_UPDATE_MODULE, payload: data };
 };
 // Actions
-export interface updateModuleSucessAction {
+export interface IUpdateModuleSucessAction {
   payload: any;
   type: UPDATE_MODULE_SUCCESS;
 }
 export const updateModuleSucessAction = (
   data: any,
-): updateModuleSucessAction => {
+): IUpdateModuleSucessAction => {
   return { type: UPDATE_MODULE_SUCCESS, payload: data };
 };
 // ---
 // Actions
-export interface initMenuAction {
+export interface IInitMenuAction {
   payload: any;
   type: DO_INIT_MENU;
 }
-export const initMenuAction = (data: any): initMenuAction => {
+export const initMenuAction = (data: any): IInitMenuAction => {
   return { type: DO_INIT_MENU, payload: data };
 };
 // Actions
-export interface initAppDataAction {
+export interface IInitAppDataAction {
   payload: any;
   type: DO_INIT_APPDATA;
 }
-export const initAppDataAction = (data: any): initAppDataAction => {
+export const initAppDataAction = (data: any): IInitAppDataAction => {
   return { type: DO_INIT_APPDATA, payload: data };
 };
 // Actions
-export interface initAppDataSuccessAction {
+export interface IInitAppDataSuccessAction {
   payload: any;
   type: INIT_APPDATA_SUCCESS;
 }
 export const initAppDataSuccessAction = (
   data: any,
-): initAppDataSuccessAction => {
+): IInitAppDataSuccessAction => {
   return { type: INIT_APPDATA_SUCCESS, payload: data };
 };
 // userActions
 // Actions
-export interface getUserInfoSuccess {
+export interface IGetUserInfoSuccess {
   payload: any;
   type: GET_USERINFO_SUCCESS;
 }
-export const getUserInfoSuccess = (data: any): getUserInfoSuccess => {
+export const getUserInfoSuccess = (data: any): IGetUserInfoSuccess => {
   return { type: GET_USERINFO_SUCCESS, payload: data };
 };
 // Actions
-export interface getUserInfoAction {
+export interface IGetUserInfoAction {
   payload: any;
   type: DO_GET_USERINFO;
 }
-export const getUserInfoAction = (data: any): getUserInfoAction => {
+export const getUserInfoAction = (data: any): IGetUserInfoAction => {
   return { type: DO_GET_USERINFO, payload: data };
 };
 
-export type ILayOutActionsType =
-  | getAccessMenuAction
-  | getAccessMenuSuccessAction
-  | updateModuleAction
-  | updateModuleSucessAction
-  | initMenuAction
-  | initAppDataAction
-  | initAppDataSuccessAction
-  | getUserInfoSuccess
-  | getUserInfoAction;
+export type ILayOutActionsTypes =
+  | IGetAccessMenuAction
+  | IGetAccessMenuSuccessAction
+  | IUpdateModuleAction
+  | IUpdateModuleSucessAction
+  | IInitMenuAction
+  | IInitAppDataAction
+  | IInitAppDataSuccessAction
+  | IGetUserInfoSuccess
+  | IGetUserInfoAction;

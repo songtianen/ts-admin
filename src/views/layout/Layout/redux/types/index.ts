@@ -1,4 +1,4 @@
-export interface IAppState {
+export interface IReduxAppState {
   name: string;
   avatar: string;
   isAdmin: string;

@@ -8,5 +8,3 @@ module.exports = {
   semi: true,
   spacing: false,
 };
-// elintrc.json: extends[plugin:prettier/recommended]
-// rules:[]  "prettier/prettier": "error",

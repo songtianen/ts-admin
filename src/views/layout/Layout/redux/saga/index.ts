@@ -6,16 +6,14 @@ import {
   UPDATE_MODULE_SUCCESS,
   DO_UPDATE_MODULE,
   DO_INIT_APPDATA,
-  ILayOutActionsType,
+  ILayOutActionsTypes,
 } from '../actions/actions';
 import util from '../../../../../util/util';
-import { SagaIterator } from 'redux-saga';
-import { AxiosPromise } from 'axios';
 
 // 不需要后端返回的菜单
 // import constantMenu from '../../../../conf/menuConf';
 
-function* initAppData(action: ILayOutActionsType): SagaReturnType<any> {
+function* initAppData(action: ILayOutActionsTypes): SagaReturnType<any> {
   const pathName = action.payload;
   // console.log('init_APP_data_pathName', pathName);
   const theme = localStorage.getItem('theme') || 'light';
@@ -52,7 +50,7 @@ function* initAppData(action: ILayOutActionsType): SagaReturnType<any> {
         theme,
       };
       // userInfo---
-      const isAdmin = userInfo.data.isAdmin;
+      const { isAdmin } = userInfo.data;
       const userInfoData = {
         // 用户信息
         name: userInfo.data.userName,
@@ -84,7 +82,7 @@ function* initAppData(action: ILayOutActionsType): SagaReturnType<any> {
   }
 }
 
-function* updateModule(action: ILayOutActionsType) {
+function* updateModule(action: ILayOutActionsTypes) {
   // console.log('请求菜单-updateModule', action);
   // 异步在这里做一些事情
   yield put({
