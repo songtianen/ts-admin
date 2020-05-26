@@ -1,7 +1,13 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 // import { createBrowserHistory } from 'history';
-
-import { loginByUsername, loginRegister } from '../../../../api';
+import { AxiosResponse } from 'axios';
+import {
+  loginByUsername,
+  loginRegister,
+  IResponseServerStatus,
+  IResponsetLoginByUsernameData,
+  IResponsetloginRegisterData,
+} from '../../../../api';
 import { setToken, getToken } from '../../../../util/token';
 import {
   BEFORE_LOGIN,
@@ -20,8 +26,9 @@ import {
 function* fetchUser(action: ILoginActionsType['ILogin']) {
   try {
     yield put({ type: BEFORE_LOGIN, payload: {} });
-    const userInfo = yield call(loginByUsername, action.payload);
-    console.log('登陆', userInfo);
+    const userInfo: AxiosResponse<IResponsetLoginByUsernameData> &
+      IResponseServerStatus = yield call(loginByUsername, action.payload);
+    console.log('登陆', userInfo.data.accessToken);
     if (userInfo.statusCode === 200 && userInfo.data.accessToken) {
       const token = userInfo.data.accessToken;
       const setTokens = (_token: string) => {
@@ -37,9 +44,9 @@ function* fetchUser(action: ILoginActionsType['ILogin']) {
       };
 
       yield put({ type: LOGIN_SUCCESS, payload: userInfo });
-      setTokens(token).then((doc) => {
+      setTokens(token).then(() => {
         // history.push('/');
-        console.log('setToken', doc);
+        // console.log('setToken', doc);
       });
     }
     if (userInfo.statusCode === 500) {
@@ -53,8 +60,10 @@ function* fetchUser(action: ILoginActionsType['ILogin']) {
 function* register(action: ILoginActionsType['IRegister']) {
   try {
     yield put({ type: BEFORE_LOGIN, payload: {} });
-    const userInfo = yield call(loginRegister, action.payload);
+    const userInfo: AxiosResponse<IResponsetloginRegisterData> &
+      IResponseServerStatus = yield call(loginRegister, action.payload);
     if (userInfo.statusCode === 200 && userInfo.data.accessToken) {
+      console.log('注册返回值', userInfo);
       setToken(userInfo.data.accessToken);
       yield put({ type: REGISTER_SUCCESS, payload: userInfo });
       // history.push('/');

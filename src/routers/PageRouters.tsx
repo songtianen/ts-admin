@@ -6,8 +6,8 @@ import {
   // Redirect,
 } from 'react-router-dom';
 import MyLayout from '../views/layout/Layout';
-import Login from '../views/pages/user/components/Login';
-import Register from '../views/pages/user/components/Register/register';
+import Login from '../views/pages/user/Login';
+import Register from '../views/pages/user/Register/register';
 
 const Routers = () => (
   <Router>

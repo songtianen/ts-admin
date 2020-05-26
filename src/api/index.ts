@@ -1,6 +1,11 @@
 import qs from 'qs';
 import request from '../util/request';
 
+export interface IResponseServerStatus {
+  statusCode?: number;
+  msg?: string;
+}
+
 export function resetdb(data) {
   return request({
     url: '/user/resetdb',
@@ -9,10 +14,12 @@ export function resetdb(data) {
     // loding:'spin',
   });
 }
-
 export interface IRequestLoginByUsernameData {
   username: string;
   password: string;
+}
+export interface IResponsetLoginByUsernameData {
+  accessToken: string;
 }
 export function loginByUsername(data: IRequestLoginByUsernameData) {
   return request({
@@ -22,8 +29,20 @@ export function loginByUsername(data: IRequestLoginByUsernameData) {
     // loding:'spin',
   });
 }
+// ----register----
 
-export function loginRegister(params) {
+export interface IRequestLoginRegisterData {
+  username?: string;
+  password?: string;
+  email?: string;
+  confirm?: string;
+  phone?: string;
+  captcha?: string;
+}
+export interface IResponsetloginRegisterData {
+  accessToken: string;
+}
+export function loginRegister(params: IRequestLoginRegisterData) {
   return request({
     url: '/user/register',
     method: 'post',
