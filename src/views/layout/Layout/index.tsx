@@ -1,9 +1,3 @@
-/* eslint-disable react/no-unused-state */
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/state-in-constructor */
-/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
@@ -18,8 +12,9 @@ import Footer from '../Footer';
 import reduxApp from './redux';
 import { IReduxState } from '../../../redux/types';
 
-const { Content } = Layout;
+const { Content, Header } = Layout;
 const { initAppDataAction, updateModuleAction } = reduxApp.actions;
+
 export interface IProps extends RouteChildrenProps {
   dispatch: Dispatch;
   moduleList: [];
@@ -31,24 +26,45 @@ export interface ILayoutState {
   responsive: boolean;
   navTabShow: boolean;
   headerItemDisplay: boolean;
-  layOutHeight: number | null;
+  layOutHeight: number | '';
 }
 
 class MyLayout extends React.PureComponent<IProps, ILayoutState> {
+  // constructor(props: IProps) {
+  //   super(props);
+  // }
+  // eslint-disable-next-line react/state-in-constructor
   state: ILayoutState = {
     collapsed: false,
     responsive: false,
     navTabShow: true,
     headerItemDisplay: true,
-    layOutHeight: null,
+    layOutHeight: '',
   };
 
-  componentDidUpdate(prevProps: IProps) {
+  // // eslint-disable-next-line react/no-deprecated
+  // componentWillMount() {
+  //   this.getClientWidth();
+  // }
+
+  componentDidMount() {
+    this.initAppData();
+    this.getClientWidth();
+    window.onresize = () => {
+      this.getClientWidth();
+    };
+    const StartLoading = document.getElementById('StartLoading');
+    if (StartLoading) {
+      document.body.removeChild(StartLoading);
+    }
+  }
+
+  componentDidUpdate(prevProps: any) {
+    // eslint-disable-next-line react/destructuring-assignment
     const thisPathname = this.props.location.pathname;
     const prevPathname = prevProps.location.pathname;
     if (thisPathname !== prevPathname) {
       const { moduleList, dispatch, siderOpenKeys } = this.props;
-
       const findModule = util.findCurrentMenuNameAndModule(
         moduleList,
         thisPathname,
@@ -69,25 +85,22 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
     }
   }
 
-  componentDidMount() {
-    console.log('layout.props', this.props);
-
-    this.getClientWidth();
-    this.initAppData();
-    window.onresize = () => {
-      this.getClientWidth();
-    };
-    const StartLogin: HTMLElement | null = document.getElementById(
-      'StartLoading',
-    );
-
-    if (StartLogin) {
-      document.body.removeChild(StartLogin);
+  // 初始化Layout组件，初始化Sider组件
+  initAppData = () => {
+    // 获取用户信息,菜单,权限列表(整个应用就一种layout布局,App就是相当母版页,不必在AuthrizedRoute里每次路由跳转的时候判断是否需要获取,是否登录也在此处判断)
+    // 没有登录，跳转到登录界面，并记下当前路径
+    const { history } = this.props;
+    const token = getToken();
+    if (!token) {
+      history.replace('/login');
+      return;
     }
-  }
+    const { dispatch, location } = this.props;
+    dispatch(initAppDataAction(location.pathname));
+  };
 
   // 获取当前浏览器宽度并设置responsive管理响应式
-  getClientWidth = (): void => {
+  getClientWidth = () => {
     const { clientWidth } = document.body;
     const { clientHeight } = document.body;
 
@@ -119,87 +132,75 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
     }
   };
 
-  toggle = (): void => {
+  toggle = () => {
+    const { collapsed } = this.state;
     this.setState({
-      collapsed: !this.state.collapsed,
+      collapsed: !collapsed,
     });
   };
 
   // 隐藏 contentTab
-  toggleNavTab = (): void => {
-    this.setState({ navTabShow: !this.state.navTabShow });
+  toggleNavTab = () => {
+    const { navTabShow } = this.state;
+    this.setState({ navTabShow: !navTabShow });
   };
 
-  // 初始化Layout组件，初始化Sider组件
-  initAppData = (): void => {
-    // 获取用户信息,菜单,权限列表(整个应用就一种layout布局,App就是相当母版页,不必在AuthrizedRoute里每次路由跳转的时候判断是否需要获取,是否登录也在此处判断)
-    // 没有登录，跳转到登录界面，并记下当前路径
-    const token = getToken();
-    if (!token) {
-      this.props.history.push('/login');
-      return;
-    }
-    const { dispatch, location } = this.props;
-    dispatch(initAppDataAction(location.pathname));
-  };
-
-  public render() {
-    console.log('Layout-Render');
+  render() {
     const { siderModuleMenu } = this.props;
+    const {
+      responsive,
+      collapsed,
+      navTabShow,
+      headerItemDisplay,
+      layOutHeight,
+    } = this.state;
+    console.log('Layout-rnder');
     return (
-      <Layout>
+      <Layout style={{ height: layOutHeight }}>
         <MySider
-        // responsive={this.state.responsive}
-        // collapsed={this.state.collapsed}
-        // siderModuleMenu={siderModuleMenu}
+          responsive={responsive}
+          collapsed={collapsed}
+          siderModuleMenu={siderModuleMenu}
         />
         <Layout>
-          <MyHeader
-          // collapsed={this.state.collapsed}
-          // toggle={this.toggle}
-          // toggleNavTab={this.toggleNavTab}
-          // navTabshow={this.state.navTabShow}
-          // itemDisplay={this.state.headerItemDisplay}
-          />
+          <Header style={{ backgroundColor: '#fff' }}>
+            <MyHeader
+              collapsed={collapsed}
+              toggle={this.toggle}
+              toggleNavTab={this.toggleNavTab}
+              navTabshow={navTabShow}
+              itemDisplay={headerItemDisplay}
+            />
+          </Header>
+
           <Content
-            style={{
-              height: '100%',
-              overflow: 'auto',
-            }}
+          // style={{
+          //   height: '100%',
+          //   overflow: 'auto',
+          // }}
           >
             <MyNavTabs
-            // style={{
-            //   marginTop: 49,
-            //   width: '100%',
-            //   height: '100%',
-            //   display: this.state.navTabShow ? 'block' : 'none',
-            // }}
-            // show={this.state.navTabShow}
+              // style={{
+              //   marginTop: 49,
+              //   width: '100%',
+              //   height: '100%',
+              //   display: this.state.navTabShow ? 'block' : 'none',
+              // }}
+              show={navTabShow}
             />
           </Content>
-          {/* <Footer itemDisplay={this.state.headerItemDisplay} /> */}
-          <Footer />
+          <Footer itemDisplay={headerItemDisplay} />
         </Layout>
       </Layout>
     );
   }
 }
-
 const mapState2Props = (state: IReduxState) => {
-  const {
-    name,
-    siderModuleMenu,
-    moduleList,
-    // headerCurrentModuleName,
-    siderOpenKeys,
-  } = state.app;
+  const { siderModuleMenu, moduleList, siderOpenKeys } = state.app;
   return {
-    name,
     moduleList,
     siderModuleMenu,
     siderOpenKeys,
-    // headerCurrentModuleName,
   };
 };
-
 export default connect(mapState2Props)(MyLayout);

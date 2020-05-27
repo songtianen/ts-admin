@@ -3,7 +3,7 @@ export interface IReduxAppState {
   avatar: string;
   isAdmin: string;
   token: string;
-  theme: string;
+  theme: any;
   permission: [];
   spinLoading: false;
   toPath: string;

@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import * as React from 'react';
 
-export interface IFooterProps {}
+export interface IFooterProps {
+  itemDisplay: boolean;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Footer(props: IFooterProps) {

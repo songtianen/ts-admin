@@ -5,7 +5,7 @@ import {
   Switch,
   // Redirect,
 } from 'react-router-dom';
-import MyLayout from '../views/layout/Layout';
+import Layout from '../views/layout/Layout';
 import Login from '../views/pages/user/Login';
 import Register from '../views/pages/user/Register/register';
 
@@ -14,7 +14,7 @@ const Routers = () => (
     <Switch>
       <Route exact path='/login' component={Login} />
       <Route exact path='/register' component={Register} />
-      <Route path='/' component={MyLayout} />
+      <Route path='/' component={Layout} />
     </Switch>
   </Router>
 );

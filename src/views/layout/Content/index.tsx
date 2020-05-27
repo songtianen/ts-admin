@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import * as React from 'react';
 
-export interface IContentProps {}
+export interface IContentProps {
+  show: boolean;
+}
 
 export interface IContentState {}
 

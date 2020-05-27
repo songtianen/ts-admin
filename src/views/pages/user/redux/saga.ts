@@ -28,7 +28,6 @@ function* fetchUser(action: ILoginActionsType['ILogin']) {
     yield put({ type: BEFORE_LOGIN, payload: {} });
     const userInfo: AxiosResponse<IResponsetLoginByUsernameData> &
       IResponseServerStatus = yield call(loginByUsername, action.payload);
-    console.log('登陆', userInfo.data.accessToken);
     if (userInfo.statusCode === 200 && userInfo.data.accessToken) {
       const token = userInfo.data.accessToken;
       const setTokens = (_token: string) => {
@@ -63,7 +62,6 @@ function* register(action: ILoginActionsType['IRegister']) {
     const userInfo: AxiosResponse<IResponsetloginRegisterData> &
       IResponseServerStatus = yield call(loginRegister, action.payload);
     if (userInfo.statusCode === 200 && userInfo.data.accessToken) {
-      console.log('注册返回值', userInfo);
       setToken(userInfo.data.accessToken);
       yield put({ type: REGISTER_SUCCESS, payload: userInfo });
       // history.push('/');
