@@ -1,11 +1,5 @@
 import * as React from 'react';
 import { Form, Input, Button } from 'antd';
-import {
-  UserOutlined,
-  MailOutlined,
-  LockOutlined,
-  MobileOutlined,
-} from '@ant-design/icons';
 import { RouteChildrenProps } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -13,6 +7,7 @@ import UserFormWarp from '../components/FormWarp';
 import { register } from '../redux/actions';
 import { IReduxState } from '../../../../redux/types';
 import useDocAndHTML from '../hooks/useDocAndHTML';
+import MyIcon from '../../../components/MyIcon';
 
 const formItemLayout = {
   labelCol: {
@@ -82,7 +77,9 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input
-            prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+            prefix={
+              <MyIcon type='icon-user' style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
             placeholder='用户名'
           />
         </Form.Item>
@@ -95,7 +92,9 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input
-            prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+            prefix={
+              <MyIcon type='icon-mail' style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
             placeholder='邮箱'
           />
         </Form.Item>
@@ -111,7 +110,9 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input.Password
-            prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+            prefix={
+              <MyIcon type='icon-lock' style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
             placeholder='密码'
             visibilityToggle
           />
@@ -147,7 +148,9 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input
-            prefix={<MobileOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+            prefix={
+              <MyIcon type='icon-mobile' style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
             placeholder='手机号'
             style={{ width: '100%' }}
           />

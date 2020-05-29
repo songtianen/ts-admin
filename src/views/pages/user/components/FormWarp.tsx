@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Button, Card } from 'antd';
-import { GithubOutlined } from '@ant-design/icons';
-
 import './index.less';
+import MyIcon from '../../../components/MyIcon';
 
 const logo = require('../../../../resource/assets/logo.jpg');
 
@@ -43,7 +42,8 @@ const UserFormWarp: React.FunctionComponent<IUserFormWarpProps> = (props) => {
           <div className='login-rigster-meta'>
             <Meta
               avatar={
-                <GithubOutlined
+                <MyIcon
+                  type='icon-github'
                   style={{ fontSize: '22px', color: '#1890FF' }}
                 />
               }

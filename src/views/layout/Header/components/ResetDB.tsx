@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { DatabaseOutlined, LockOutlined } from '@ant-design/icons';
 import { Modal, Form, Button, Input, notification } from 'antd';
 import { resetdb } from '../../../../api';
+import MyIcon from '../../../components/MyIcon';
 
 const FormItem = Form.Item;
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -40,8 +40,9 @@ const ResetDB: React.FunctionComponent<IResetDBProps> = () => {
 
   return (
     <div>
-      <DatabaseOutlined
-        style={{ fontSize: '20px', color: '#08c' }}
+      <MyIcon
+        type='icon-database'
+        style={{ fontSize: 16, color: '#08c' }}
         onClick={iconClick}
       />
       <Modal
@@ -61,7 +62,9 @@ const ResetDB: React.FunctionComponent<IResetDBProps> = () => {
             ]}
           >
             <Input.Password
-              prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              prefix={
+                <MyIcon type='icon-lock' style={{ color: 'rgba(0,0,0,.25)' }} />
+              }
               type='password'
               placeholder='请输入密码'
             />

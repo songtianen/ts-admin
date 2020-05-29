@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
-import { ShrinkOutlined, ArrowsAltOutlined } from '@ant-design/icons';
+import MyIcon from '../../../components/MyIcon';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IFullScreenProps {}
@@ -25,8 +26,6 @@ const FullScreen: React.FunctionComponent<IFullScreenProps> = (props) => {
 
     document.addEventListener('fullscreenchange', () => {
       setFullScreen((val) => {
-        console.log('----fullscreenchange---', val);
-
         return !val;
       });
     });
@@ -99,9 +98,21 @@ const FullScreen: React.FunctionComponent<IFullScreenProps> = (props) => {
   return (
     <>
       {isfullScreen ? (
-        <ShrinkOutlined onClick={handleFullscreen} />
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+        <div onClick={handleFullscreen}>
+          <MyIcon
+            type='icon-fullscreen-exit'
+            style={{ fontSize: 14, fontWeight: 'bold' }}
+          />
+        </div>
       ) : (
-        <ArrowsAltOutlined onClick={handleFullscreen} />
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+        <div onClick={handleFullscreen}>
+          <MyIcon
+            type='icon-fullscreen'
+            style={{ fontSize: 14, fontWeight: 'bold' }}
+          />
+        </div>
       )}
     </>
   );

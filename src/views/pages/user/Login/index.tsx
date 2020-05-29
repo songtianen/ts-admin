@@ -2,13 +2,13 @@ import React, { FC, useState, useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { RouteChildrenProps } from 'react-router-dom';
 import { IReduxState } from '../../../../redux/types';
 import { login } from '../redux/actions';
 import UserFormWarp from '../components/FormWarp';
 import useDocAndHTML from '../hooks/useDocAndHTML';
 import './index.less';
+import MyIcon from '../../../components/MyIcon';
 
 const layout = {
   // labelCol: { span: 24 },
@@ -84,7 +84,10 @@ const Login: FC<ILoginProps> = (props) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <span>用户名：admin/admin2/HR/CTO/CFO/CMO</span>
+        用户名：
+        <span style={{ backgroundColor: 'yellow' }}>
+          admin/admin2/HR/CTO/CFO/CMO
+        </span>
         <Form.Item
           // label='Username'
           name='username'
@@ -96,7 +99,9 @@ const Login: FC<ILoginProps> = (props) => {
             },
           ]}
         >
-          <Input prefix={<UserOutlined style={{ color: '#aaa' }} />} />
+          <Input
+            prefix={<MyIcon type='icon-user' style={{ color: '#aaa' }} />}
+          />
         </Form.Item>
         <Form.Item
           // label='Password'
@@ -110,7 +115,7 @@ const Login: FC<ILoginProps> = (props) => {
           ]}
         >
           <Input.Password
-            prefix={<LockOutlined style={{ color: '#aaa' }} />}
+            prefix={<MyIcon type='icon-lock' style={{ color: '#aaa' }} />}
             placeholder='Password'
           />
         </Form.Item>

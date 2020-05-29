@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Menu } from 'antd';
-import {
-  GithubOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from '@ant-design/icons';
+import { Menu } from 'antd';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { IReduxState } from '../../../redux/types';
 import ResetDB from './components/ResetDB';
@@ -14,17 +9,13 @@ import FullScreen from './components/FullScreen';
 import ModuleMenu from './components/ModuleMenu';
 import UserCenter from './components/UserCenter';
 import Loadble from './components/RenderLoadble';
-
-const collapsedStyle = {
-  fontSize: 18,
-};
+import MyIcon from '../../components/MyIcon';
+import './index.less';
 
 export interface IHeaderProps extends RouteComponentProps {
   collapsed: boolean;
   toggle: () => void;
-  toggleNavTab: () => void;
   navTabshow: boolean;
-  itemDisplay: boolean;
   theme: any;
   avatar: string;
   headerCurrentModuleName: string;
@@ -32,13 +23,7 @@ export interface IHeaderProps extends RouteComponentProps {
 }
 
 const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
-  const {
-    moduleList,
-    itemDisplay,
-    toggle,
-    collapsed,
-    headerCurrentModuleName,
-  } = props;
+  const { moduleList, headerCurrentModuleName } = props;
   const { theme } = props;
   const HeaderModuleList = moduleList.filter((item: any) => item.leftMenu);
   const moduleListLen = moduleList.length;
@@ -50,34 +35,28 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
     const ImoduleList = accesseMenu.filter((item) => {
       return item.leftMenu && item.name === e.key;
     });
-    if (location.pathname !== moduleList[0].path) {
+
+    if (location.pathname !== ImoduleList[0].path) {
       history.push(ImoduleList[0].path);
     }
   };
 
-  console.log('Header-render', moduleList);
+  console.log('Header-render');
   return (
-    <Row justify='start'>
-      <Col xs={4} sm={4} md={2} lg={1} xl={1}>
-        <Menu
-          theme={theme}
-          style={{
-            display: 'flex',
-            height: '100%',
-            border: 'none',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          onClick={toggle}
-        >
-          {collapsed ? (
-            <MenuUnfoldOutlined style={collapsedStyle} />
-          ) : (
-            <MenuFoldOutlined style={collapsedStyle} />
-          )}
-        </Menu>
-      </Col>
-      <Col xs={14} sm={16} md={10} lg={10} xl={10}>
+    <div
+      style={{
+        display: 'flex',
+        height: '50px',
+        backgroundColor: '#fff',
+        boxShadow: '0px -2px 8px #e0e0e0',
+      }}
+    >
+      <div
+        style={{
+          flex: 2,
+          minWidth: '100px',
+        }}
+      >
         {moduleListLen ? (
           <ModuleMenu
             moduleList={HeaderModuleList}
@@ -88,49 +67,45 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
         ) : (
           <Loadble num={5} />
         )}
-      </Col>
-      <Col
-        sm={12}
-        md={7}
-        lg={6}
-        xl={6}
+      </div>
+      <Menu
+        theme={theme}
         style={{
-          display: itemDisplay ? 'block' : 'none',
-          // backgroundColor: 'green',
+          flex: 2,
+          border: 'none',
         }}
       >
-        <Menu
-          theme={theme}
+        <div
           style={{
-            border: 'none',
+            display: 'flex',
+            flexDirection: 'row',
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'space-around',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              height: '100%',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}
-          >
-            <SearchInput />
-            <a href='https://github.com/songtianen'>
-              <GithubOutlined
-                style={{
-                  fontSize: 20,
-                }}
-              />
-            </a>
-            <FullScreen />
-            <ResetDB />
-          </div>
-        </Menu>
-      </Col>
-      <Col xs={6} sm={4} md={5} lg={4} xl={4} xxl={4}>
+          <SearchInput />
+          <a href='https://github.com/songtianen'>
+            <MyIcon
+              type='icon-github-fill'
+              style={{
+                fontSize: 17,
+              }}
+            />
+          </a>
+          <FullScreen />
+          <ResetDB />
+        </div>
+      </Menu>
+      <div
+        style={{
+          flex: 1,
+          minWidth: '40px',
+        }}
+      >
         <UserCenter />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

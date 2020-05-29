@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Menu, Radio, Tag, Badge, Avatar } from 'antd';
-import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -9,6 +8,7 @@ import { updateModuleAction } from '../../Layout/redux/actions/actions';
 import { LOGOUT_SUCCESS } from '../../../pages/user/redux/actions';
 import { logout } from '../../../../api';
 import { IReduxState } from '../../../../redux/types';
+import MyIcon from '../../../components/MyIcon';
 
 const { SubMenu } = Menu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -53,13 +53,16 @@ const UserCenter: React.FunctionComponent<IUserCenterProps> = (props) => {
       });
     }
   };
-  console.log('userList -render', props);
+  console.log('userList -render');
   return (
     <Menu
       mode='horizontal'
       style={{
         border: 'none',
-        textAlign: 'center',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
       onClick={userMenuClick}
       theme={theme}
@@ -84,7 +87,7 @@ const UserCenter: React.FunctionComponent<IUserCenterProps> = (props) => {
             </Radio.Group>
           </Menu.Item>
           <Menu.Item key='setting:1'>
-            <UserOutlined />
+            <MyIcon type='icon-user' />
             个人信息
           </Menu.Item>
           <Menu.Item key='logout'>
@@ -95,7 +98,7 @@ const UserCenter: React.FunctionComponent<IUserCenterProps> = (props) => {
                 height: '100%',
               }}
             >
-              <LogoutOutlined />
+              <MyIcon type='icon-logout' />
               退出登录
             </span>
           </Menu.Item>

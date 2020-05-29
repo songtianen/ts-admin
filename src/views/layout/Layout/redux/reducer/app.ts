@@ -12,7 +12,7 @@ const initialState: IReduxAppState = {
   avatar: '',
   isAdmin: '',
   token: '',
-  theme: undefined,
+  theme: 'light',
   permission: [],
   spinLoading: false,
   toPath: '/',

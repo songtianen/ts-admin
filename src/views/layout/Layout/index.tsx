@@ -7,12 +7,13 @@ import { getToken } from '../../../util/token';
 import util from '../../../util/util';
 import MySider from '../Sider';
 import MyHeader from '../Header';
-import MyNavTabs from '../Content';
-import Footer from '../Footer';
+import MyContent from '../Content';
+import MyFooter from '../Footer';
 import reduxApp from './redux';
 import { IReduxState } from '../../../redux/types';
+import MyIcon from '../../components/MyIcon';
 
-const { Content, Header } = Layout;
+const { Content, Sider, Footer } = Layout;
 const { initAppDataAction, updateModuleAction } = reduxApp.actions;
 
 export interface IProps extends RouteChildrenProps {
@@ -20,6 +21,7 @@ export interface IProps extends RouteChildrenProps {
   moduleList: [];
   siderModuleMenu: [];
   siderOpenKeys: [];
+  theme: any;
 }
 export interface ILayoutState {
   collapsed: boolean;
@@ -139,12 +141,6 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
     });
   };
 
-  // 隐藏 contentTab
-  toggleNavTab = () => {
-    const { navTabShow } = this.state;
-    this.setState({ navTabShow: !navTabShow });
-  };
-
   render() {
     const { siderModuleMenu } = this.props;
     const {
@@ -154,53 +150,71 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
       headerItemDisplay,
       layOutHeight,
     } = this.state;
+    const { theme } = this.props;
     console.log('Layout-rnder');
     return (
       <Layout style={{ height: layOutHeight }}>
-        <MySider
-          responsive={responsive}
+        <Sider
+          breakpoint='md'
+          collapsedWidth={responsive ? 0 : undefined}
+          trigger={
+            collapsed ? (
+              <MyIcon
+                type='icon-indent'
+                style={{
+                  fontSize: 20,
+                  color: '#777',
+                }}
+              />
+            ) : (
+              <MyIcon
+                type='icon-outdent'
+                style={{ fontSize: 20, color: '#777' }}
+              />
+            )
+          }
+          collapsible
           collapsed={collapsed}
-          siderModuleMenu={siderModuleMenu}
-        />
-        <Layout>
-          <Header style={{ backgroundColor: '#fff' }}>
-            <MyHeader
-              collapsed={collapsed}
-              toggle={this.toggle}
-              toggleNavTab={this.toggleNavTab}
-              navTabshow={navTabShow}
-              itemDisplay={headerItemDisplay}
-            />
-          </Header>
+          width={180}
+          theme={theme}
+          onCollapse={this.toggle}
+          style={{
+            // boxShadow: '-2px 0px 10px #eee',
+            boxSizing: 'content-box',
+            borderRight: '1px solid #eee',
+            backgroundColor: '#FcFcFc',
+          }}
+        >
+          <MySider collapsed={collapsed} siderModuleMenu={siderModuleMenu} />
+        </Sider>
 
-          <Content
-          // style={{
-          //   height: '100%',
-          //   overflow: 'auto',
-          // }}
-          >
-            <MyNavTabs
-              // style={{
-              //   marginTop: 49,
-              //   width: '100%',
-              //   height: '100%',
-              //   display: this.state.navTabShow ? 'block' : 'none',
-              // }}
-              show={navTabShow}
-            />
+        <Layout style={{ backgroundColor: '#F0F2F5' }}>
+          {/* <Header> */}
+          <MyHeader
+            collapsed={collapsed}
+            toggle={this.toggle}
+            navTabshow={navTabShow}
+          />
+          {/* </Header> */}
+
+          <Content>
+            <MyContent />
           </Content>
-          <Footer itemDisplay={headerItemDisplay} />
+          <Footer>
+            <MyFooter itemDisplay={headerItemDisplay} />
+          </Footer>
         </Layout>
       </Layout>
     );
   }
 }
 const mapState2Props = (state: IReduxState) => {
-  const { siderModuleMenu, moduleList, siderOpenKeys } = state.app;
+  const { siderModuleMenu, moduleList, siderOpenKeys, theme } = state.app;
   return {
     moduleList,
     siderModuleMenu,
     siderOpenKeys,
+    theme,
   };
 };
 export default connect(mapState2Props)(MyLayout);

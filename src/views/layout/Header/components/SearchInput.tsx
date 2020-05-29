@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import * as React from 'react';
 import { Input } from 'antd';
-import { ArrowLeftOutlined, SearchOutlined } from '@ant-design/icons';
+import MyICon from '../../../components/MyIcon';
 
 interface ISearchInputProps {}
 
@@ -13,10 +13,15 @@ const SearchInput: React.FunctionComponent<ISearchInputProps> = (props) => {
   return (
     <Input
       placeholder='Search'
-      disabled
       style={{ border: 'none', width: 150 }}
       size='small'
-      prefix={focus ? <ArrowLeftOutlined /> : <SearchOutlined />}
+      prefix={
+        focus ? (
+          <MyICon type='icon-arrowleft' />
+        ) : (
+          <MyICon type='icon-search' style={{ fontSize: 14, color: '#aaa' }} />
+        )
+      }
       value={value}
     />
   );
