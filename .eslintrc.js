@@ -33,6 +33,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'no-param-reassign':[0],
     'no-plusplus':[0],
+    'no-return-assign':[0],
     'import/prefer-default-export':[0],
     'react/prop-types': [0],
     '@typescript-eslint/camelcase':[0],

@@ -3,7 +3,7 @@ import TableLoading from '../views/components/TableLoading';
 
 const Menu = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "menu" */ '../views/pages/system/Menu'),
+    import(/* webpackChunkName: "menu" */ '../views/pages/system/Menu/index'),
   loading: TableLoading,
 });
 const Notdone = Loadable({

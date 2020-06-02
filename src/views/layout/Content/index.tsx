@@ -55,7 +55,7 @@ const MyContent: React.FunctionComponent<IMyContentProps> = (props) => {
         closable: currentPage.path !== '/',
       };
       setOPenPages((pages) => {
-        console.log('>>>>openPages', pages);
+        // console.log('>>>>openPages', pages);
         return [...pages, newOpenPage];
       });
       setPageCurrentName(currentPage.name);
