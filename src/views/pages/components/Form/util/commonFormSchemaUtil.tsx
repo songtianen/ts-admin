@@ -191,7 +191,6 @@ const transformTreeSelect = (
   field: IUIEditSchemaProps,
   schemaProperty?: any,
 ) => {
-  console.log('treeselect', field);
   const schemaOptions: TreeSelectProps<any> = field['ui:options'];
 
   return formItemWrapper(() => <TreeSelect {...schemaOptions} />, field);
@@ -345,8 +344,6 @@ const parse = (id: string, schema: IEditSchemaProps, uiSchema: any) => {
         items.push(transformUpload(field, schemaProperty));
         break;
       case 'treeSelect':
-        console.log('uiSchema--parse', field);
-
         items.push(transformTreeSelect(field, schemaProperty));
         break;
       default:
@@ -401,7 +398,6 @@ const createForm3 = ({
     constructor(props: any) {
       super(props);
       if (JsxGeneratorMap.has(id)) {
-        console.log('JsxGeneratorMap--有');
         this.generateJsx = JsxGeneratorMap.get(id);
       }
       this.state = {

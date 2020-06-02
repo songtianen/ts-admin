@@ -157,7 +157,6 @@ const MyContent: React.FunctionComponent<IMyContentProps> = (props) => {
         style={{
           height: '40px',
           padding: '0 36px',
-          borderTop: '1px solid #eee',
           borderBottom: 'none',
           backgroundColor: '#fff',
           boxShadow: '-2px 0px 4px #eee',

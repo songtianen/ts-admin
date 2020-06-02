@@ -12,18 +12,21 @@ import Loadble from './components/RenderLoadble';
 import MyIcon from '../../components/MyIcon';
 import './index.less';
 
+const logo = require('../../../resource/assets/logo.jpg');
+
 export interface IHeaderProps extends RouteComponentProps {
-  collapsed: boolean;
+  collapsed?: boolean;
   toggle: () => void;
   navTabshow: boolean;
   theme: any;
   avatar: string;
   headerCurrentModuleName: string;
   moduleList: any[];
+  responsive: boolean;
 }
 
 const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
-  const { moduleList, headerCurrentModuleName } = props;
+  const { moduleList, headerCurrentModuleName, responsive } = props;
   const { theme } = props;
   const HeaderModuleList = moduleList.filter((item: any) => item.leftMenu);
   const moduleListLen = moduleList.length;
@@ -47,10 +50,43 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
       style={{
         display: 'flex',
         height: '50px',
-        backgroundColor: '#fff',
+        // borderBottom: '1px solid #000',
+        zIndex: 999,
         boxShadow: '0px -2px 8px #e0e0e0',
       }}
     >
+      <Menu
+        theme={theme}
+        style={{
+          display: 'flex',
+          border: 'none',
+          width: '180px',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <img
+          src={logo}
+          alt='logo'
+          style={{
+            height: 34,
+            width: 34,
+          }}
+        />
+        <div
+          style={{
+            fontWeight: 'bold',
+            fontSize: '16px',
+            padding: '0 10px',
+            marginLeft: '10px',
+            backgroundColor: '#ffff88',
+            color: '#0070CC',
+            // display: responsive ? 'none' : 'block',
+          }}
+        >
+          TS-andmin
+        </div>
+      </Menu>
       <div
         style={{
           flex: 2,
@@ -73,6 +109,7 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
         style={{
           flex: 2,
           border: 'none',
+          display: responsive ? 'none' : 'block',
         }}
       >
         <div

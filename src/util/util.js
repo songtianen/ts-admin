@@ -2,7 +2,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-restricted-syntax */
 import React from 'react';
-import { Icon, Tag } from 'antd';
+import { Tag } from 'antd';
+import MyIcon from '../views/components/MyIcon';
 
 const getMenuByName = (name, menulist) => {
   let menu = {};
@@ -138,7 +139,10 @@ const iconTreeData = (data) => {
         params[i].key = params[i].icon;
         params[i].title = (
           <span>
-            <Icon type={params[i].icon} style={{ color: '#08c' }} />
+            <MyIcon
+              type={params[i].icon}
+              style={{ fontSize: '16px', color: '#0070CC' }}
+            />
             &nbsp;&nbsp;{params[i].icon}
           </span>
         );

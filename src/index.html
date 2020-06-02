@@ -1,189 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>RBAC:基于角色的权限控制管理系统</title>
-  </head>
-  <style>
-    .loader {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 160px;
-      height: 160px;
-      margin: -80px 0px 0px -80px;
-      background-color: transparent;
-      border-radius: 50%;
-      border: 2px solid #1890FF;
-    }
-    .hexagon-container {
-      position: relative;
-      top: 33px;
-      left: 41px;
-      border-radius: 50%;
-      margin: 0px;
-      padding: 0px;
-    }
 
-    .hexagon-container li {
-      list-style: none;
-    }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>RBAC:基于角色的权限控制管理系统</title>
+</head>
+<style>
+	#loading{
+		background-color: #eeeeee;
+		height: 100%;
+		width: 100%;
+		position: fixed;
+		z-index: 1;
+		margin-top: 0px;
+		top: 0px;
+	}
+	#loading-center{
+		width: 100%;
+		height: 100%;
+		position: relative;
+		}
+	#loading-center-absolute {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		height: 60px;
+		width: 60px;
+		margin-top: -30px;
+		margin-left: -30px;
+	    -webkit-animation: loading-center-absolute 1s infinite;
+		animation: loading-center-absolute 1s infinite;
 
-    .hexagon {
-      position: absolute;
-      width: 40px;
-      height: 23px;
-      background-color: #0070CC;
-    }
+	}
+	.object{
+		width: 20px;
+		height: 20px;
+		background-color: #0070CC;
+		float: left;
+		-moz-border-radius: 50% 50% 50% 50%;
+		-webkit-border-radius: 50% 50% 50% 50%;
+		border-radius: 50% 50% 50% 50%;
+		margin-right: 20px;
+		margin-bottom: 20px;
+	}
+	.object:nth-child(2n+0) {
+		margin-right: 0px;
 
-    .hexagon:before {
-      content: '';
-      position: absolute;
-      top: -11px;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-bottom: 11.5px solid #0070CC;
-    }
+	}
+	#object_one{
+		-webkit-animation: object_one 1s infinite;
+		animation: object_one 1s infinite;
+		}
+	#object_two{
+		-webkit-animation: object_two 1s infinite;
+		animation: object_two 1s infinite;
+		}
+	#object_three{
+		-webkit-animation: object_three 1s infinite;
+		animation: object_three 1s infinite;
+		}
+	#object_four{
+		-webkit-animation: object_four 1s infinite;
+		animation: object_four 1s infinite;
+		}
 
-    .hexagon:after {
-      content: '';
-      position: absolute;
-      top: 23px;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-top: 11.5px solid #0070CC;
-    }
+	@-webkit-keyframes loading-center-absolute{
+	100% {
+	    -ms-transform: rotate(360deg);
+	   	-webkit-transform: rotate(360deg);
+	    transform: rotate(360deg);
+		}
 
-    .hexagon.hex_1 {
-      top: 0px;
-      left: 0px;
-      animation: Animasearch 3s ease-in-out infinite;
-      animation-delay: 0.2142857143s;
-    }
+	}
+	@keyframes loading-center-absolute{
+	100% {
+	    -ms-transform: rotate(360deg);
+	   	-webkit-transform: rotate(360deg);
+	    transform: rotate(360deg);
+		}
+	}
+	@-webkit-keyframes object_one{
+	50% {
+	    -ms-transform: translate(20px,20px);
+	   	-webkit-transform: translate(20px,20px);
+	    transform: translate(20px,20px);
+		}
+	}
+	@keyframes object_one{
+	50% {
+	     -ms-transform: translate(20px,20px);
+	   	-webkit-transform: translate(20px,20px);
+	    transform: translate(20px,20px);
+		}
+	}
+	@-webkit-keyframes object_two{
+	50% {
+	    -ms-transform: translate(-20px,20px);
+	   	-webkit-transform: translate(-20px,20px);
+	    transform: translate(-20px,20px);
+		}
+	}
+	@keyframes object_two{
+	50% {
+	    -ms-transform: translate(-20px,20px);
+	   	-webkit-transform: translate(-20px,20px);
+	    transform: translate(-20px,20px);
+		}
+	}
+	@-webkit-keyframes object_three{
+	50% {
+	    -ms-transform: translate(20px,-20px);
+	   	-webkit-transform: translate(20px,-20px);
+	    transform: translate(20px,-20px);
+		}
+	}
+	@keyframes object_three{
+	50% {
+	    -ms-transform: translate(20px,-20px);
+	   	-webkit-transform: translate(20px,-20px);
+	    transform: translate(20px,-20px);
+		}
+	}
+	@-webkit-keyframes object_four{
+	50% {
+	    -ms-transform: translate(-20px,-20px);
+	   	-webkit-transform: translate(-20px,-20px);
+	    transform: translate(-20px,-20px);
+		}
+	}
+	@keyframes object_four{
+	50% {
+	    -ms-transform: translate(-20px,-20px);
+	   	-webkit-transform: translate(-20px,-20px);
+	    transform: translate(-20px,-20px);
+		}
+	}
+	</style>
 
-    .hexagon.hex_2 {
-      top: 0px;
-      left: 42px;
-      animation: Animasearch 3s ease-in-out infinite;
-      animation-delay: 0.4285714286s;
-    }
-
-    .hexagon.hex_3 {
-      top: 36px;
-      left: 63px;
-      animation: Animasearch 3s ease-in-out infinite;
-      animation-delay: 0.6428571429s;
-    }
-
-    .hexagon.hex_4 {
-      top: 72px;
-      left: 42px;
-      animation: Animasearch 3s ease-in-out infinite;
-      animation-delay: 0.8571428571s;
-    }
-
-    .hexagon.hex_5 {
-      top: 72px;
-      left: 0px;
-      animation: Animasearch 3s ease-in-out infinite;
-      animation-delay: 1.0714285714s;
-    }
-
-    .hexagon.hex_6 {
-      top: 36px;
-      left: -21px;
-      animation: Animasearch 3s ease-in-out infinite;
-      animation-delay: 1.2857142857s;
-    }
-
-    .hexagon.hex_7 {
-      top: 36px;
-      left: 21px;
-      animation: Animasearch 3s ease-in-out infinite;
-      animation-delay: 1.5s;
-    }
-
-    @keyframes Animasearch {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      15%,
-      50% {
-        transform: scale(0.5);
-        opacity: 0;
-      }
-
-      65% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    @keyframes rotate {
-      0% {
-        transform: rotate(0);
-        clip: rect(0px, 35px, 35px, 0px);
-      }
-
-      50% {
-        clip: rect(0px, 40px, 40px, 0px);
-      }
-
-      100% {
-        transform: rotate(360deg);
-        clip: rect(0px, 35px, 35px, 0px);
-      }
-    }
-
-    @keyframes rotate2 {
-      0% {
-        transform: rotate(0deg);
-        clip: rect(0px, 164px, 150px, 0px);
-      }
-
-      50% {
-        clip: rect(0px, 164px, 0px, 0px);
-        transform: rotate(360deg);
-      }
-
-      100% {
-        transform: rotate(720deg);
-        clip: rect(0px, 164px, 150px, 0px);
-      }
-    }
-
-    @keyframes rotate3 {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
-  <body>
-    <div id="StartLoading" class="loader">
-      <ul class="hexagon-container">
-        <li class="hexagon hex_1"></li>
-        <li class="hexagon hex_2"></li>
-        <li class="hexagon hex_3"></li>
-        <li class="hexagon hex_4"></li>
-        <li class="hexagon hex_5"></li>
-        <li class="hexagon hex_6"></li>
-        <li class="hexagon hex_7"></li>
-      </ul>
+<body>
+  <div id="StartLoading">
+    <div id="loading">
+      <div id="loading-center">
+        <div id="loading-center-absolute">
+          <div class="object" id="object_one"></div>
+          <div class="object" id="object_two"></div>
+          <div class="object" id="object_three"></div>
+          <div class="object" id="object_four"></div>
+        </div>
+      </div>
     </div>
-    <div id="root"></div>
-  </body>
+  </div>
+  <div id="root"></div>
+</body>
+
 </html>

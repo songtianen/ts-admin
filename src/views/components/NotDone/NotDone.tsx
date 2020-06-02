@@ -1,50 +1,45 @@
 import * as React from 'react';
-// import { Form, Input } from 'antd';
-import { Modal, Button } from 'antd';
-import CommonForm from '../../pages/components/Form';
-
+import { Button } from 'antd';
 import schema from './schema';
 
-const NotDone: React.FunctionComponent = () => {
-  const [visible, setvisible] = React.useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [formData, setformData] = React.useState({
-    title: 'title-',
-    name: 'name-',
-    path: 'path-',
-    functionCode: 'functionCode-',
-  });
-  React.useEffect(() => {
-    console.log('modal，中的 ref');
-  }, []);
-  const onCancel = () => {
-    setvisible((val) => !val);
+import { IEditSchemaProps } from '../../pages/components/Form/util/type';
+import ModalFrom from '../../pages/components/ModalForm';
+import useModalClickHook from './useModalClickHook';
+
+export interface ICommonModalProps {
+  editSchema: IEditSchemaProps;
+  editUiSchema: any;
+  formData?: any;
+}
+
+const NotDone: React.FunctionComponent<ICommonModalProps> = () => {
+  const [visible, controlVisble] = useModalClickHook(false);
+  const cancelText = '取消';
+  const okText = 'ok';
+  const title = 'title';
+
+  const modalSubmit = (values: any) => {
+    console.log('ModalSubmiit', values);
   };
-  const onOk = () => {};
-  const handleButtonClick = () => {
-    setvisible((val) => !val);
-  };
+  const destroyOnClose = true;
+
   return (
-    <div>
-      <Button onClick={handleButtonClick}>按钮</Button>
-      <Modal
+    <>
+      <ModalFrom
         visible={visible}
-        cancelText='关闭'
-        okText='提交'
-        title='sdsd'
-        onCancel={onCancel}
-        onOk={onOk}
-        destroyOnClose
-      >
-        <CommonForm
-          schema={schema.editSchema}
-          uiSchema={schema.editUiSchema}
-          formData={formData}
-          // modalSaveFunctionData={this.props.handFormSubmit}
-        />
-      </Modal>
-      NotDone!
-    </div>
+        cancelText={cancelText}
+        okText={okText}
+        title={title}
+        onCancel={controlVisble.onCancel}
+        modalSubmit={modalSubmit}
+        destroyOnClose={destroyOnClose}
+        editSchema={schema.editSchema}
+        editUiSchema={schema.editUiSchema}
+        formData={{ path: '/////' }}
+      />
+
+      <Button onClick={controlVisble.onVisible}>NotDone!</Button>
+    </>
   );
 };
 export default NotDone;

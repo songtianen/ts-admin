@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
@@ -52,9 +53,9 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
   componentDidMount() {
     this.initAppData();
     this.getClientWidth();
-    window.onresize = () => {
-      this.getClientWidth();
-    };
+    // window.onresize = () => {
+    //   this.getClientWidth();
+    // };
     const StartLoading = document.getElementById('StartLoading');
     if (StartLoading) {
       document.body.removeChild(StartLoading);
@@ -154,55 +155,52 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
     console.log('Layout-rnder');
     return (
       <Layout style={{ height: layOutHeight }}>
-        <Sider
-          breakpoint='md'
-          collapsedWidth={responsive ? 0 : undefined}
-          trigger={
-            collapsed ? (
-              <MyIcon
-                type='icon-indent'
-                style={{
-                  fontSize: 20,
-                  color: '#777',
-                }}
-              />
-            ) : (
-              <MyIcon
-                type='icon-outdent'
-                style={{ fontSize: 20, color: '#777' }}
-              />
-            )
-          }
-          collapsible
-          collapsed={collapsed}
-          width={180}
-          theme={theme}
-          onCollapse={this.toggle}
-          style={{
-            // boxShadow: '-2px 0px 10px #eee',
-            boxSizing: 'content-box',
-            borderRight: '1px solid #eee',
-            backgroundColor: '#FcFcFc',
-          }}
-        >
-          <MySider collapsed={collapsed} siderModuleMenu={siderModuleMenu} />
-        </Sider>
-
-        <Layout style={{ backgroundColor: '#F0F2F5' }}>
-          {/* <Header> */}
-          <MyHeader
-            collapsed={collapsed}
-            toggle={this.toggle}
-            navTabshow={navTabShow}
-          />
-          {/* </Header> */}
-
-          <Content>
-            <MyContent />
-          </Content>
-          <Footer>
-            <MyFooter itemDisplay={headerItemDisplay} />
-          </Footer>
+        <MyHeader
+          toggle={this.toggle}
+          navTabshow={navTabShow}
+          responsive={responsive}
+        />
+        <Layout>
+          <Sider
+            breakpoint='md'
+            collapsedWidth={responsive ? 0 : undefined}
+            // trigger={
+            //   collapsed ? (
+            //     <MyIcon
+            //       type='icon-indent'
+            //       style={{
+            //         fontSize: 20,
+            //         color: '#777',
+            //       }}
+            //     />
+            //   ) : (
+            //     <MyIcon
+            //       type='icon-outdent'
+            //       style={{ fontSize: 20, color: '#777' }}
+            //     />
+            //   )
+            // }
+            collapsible
+            width={180}
+            theme={theme}
+            onCollapse={this.toggle}
+            style={{
+              // boxShadow: '-2px 0px 10px #eee',
+              boxSizing: 'content-box',
+              borderRight: '1px solid #eee',
+              backgroundColor: '#FcFcFc',
+            }}
+          >
+            <MySider siderModuleMenu={siderModuleMenu} />
+          </Sider>
+          <Layout style={{ backgroundColor: '#F0F2F5' }}>
+            <Content>
+              <MyContent />
+            </Content>
+            <Footer>
+              <MyFooter itemDisplay={headerItemDisplay} />
+            </Footer>
+          </Layout>
         </Layout>
       </Layout>
     );
