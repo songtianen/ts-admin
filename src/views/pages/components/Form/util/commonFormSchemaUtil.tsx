@@ -64,10 +64,7 @@ function betweenFormItemWrapper(
   );
 }
 
-const formItemWrapper = (
-  formItem: () => React.ReactElement,
-  field: IUIEditSchemaProps,
-) => {
+const formItemWrapper = (formItem: () => React.ReactElement, field: IUIEditSchemaProps) => {
   // return (formData: any) => (
   //   <FormItem
   //     key={field.key}
@@ -99,17 +96,11 @@ const formItemWrapper = (
 const transformInput = (field: IUIEditSchemaProps, schemaProperty?: any) => {
   return formItemWrapper(() => <Input {...field['ui:options']} />, field);
 };
-const transformInputNumber = (
-  field: IUIEditSchemaProps,
-  schemaProperty?: any,
-) => {
+const transformInputNumber = (field: IUIEditSchemaProps, schemaProperty?: any) => {
   return formItemWrapper(() => <InputNumber {...field['ui:options']} />, field);
 };
 const transformCheckbox = (field: IUIEditSchemaProps, schemaProperty?: any) => {
-  return formItemWrapper(
-    () => <Checkbox.Group {...field['ui:options']} />,
-    field,
-  );
+  return formItemWrapper(() => <Checkbox.Group {...field['ui:options']} />, field);
 };
 const transformDatetime = (field: IUIEditSchemaProps, schemaProperty?: any) => {
   return formItemWrapper(() => <DatePicker {...field['ui:options']} />, field);
@@ -128,10 +119,7 @@ const transformSelect = (field: IUIEditSchemaProps, schemaProperty?: any) => {
     );
   });
 
-  return formItemWrapper(
-    () => <Select {...field['ui:options']}>{options}</Select>,
-    field,
-  );
+  return formItemWrapper(() => <Select {...field['ui:options']}>{options}</Select>, field);
 };
 const transformSwitch = (field: IUIEditSchemaProps, schemaProperty?: any) => {
   return formItemWrapper(() => <Switch {...field['ui:options']} />, field);
@@ -160,37 +148,24 @@ const transformUpload = (field: IUIEditSchemaProps, schemaProperty?: any) => {
   switch (field['ui:type']) {
     case 'dragger':
       return formItemWrapper(
-        () => (
-          <Upload.Dragger {...field['ui:options']}>
-            {field['ui:children']}
-          </Upload.Dragger>
-        ),
+        () => <Upload.Dragger {...field['ui:options']}>{field['ui:children']}</Upload.Dragger>,
         field,
       );
     default:
-      return formItemWrapper(
-        () => <Upload {...field['ui:options']}>{field['ui:children']}</Upload>,
-        field,
-      );
+      return formItemWrapper(() => <Upload {...field['ui:options']}>{field['ui:children']}</Upload>, field);
   }
 };
 const transformNormal = (field: IUIEditSchemaProps, schemaProperty?: any) => {
   switch (field['ui:widget']) {
     case 'input.textarea':
-      return formItemWrapper(
-        () => <Input.TextArea {...field['ui:options']} />,
-        field,
-      );
+      return formItemWrapper(() => <Input.TextArea {...field['ui:options']} />, field);
     default:
       // 默认就是普通的输入框
       return formItemWrapper(() => <Input {...field['ui:options']} />, field);
   }
 };
 
-const transformTreeSelect = (
-  field: IUIEditSchemaProps,
-  schemaProperty?: any,
-) => {
+const transformTreeSelect = (field: IUIEditSchemaProps, schemaProperty?: any) => {
   const schemaOptions: TreeSelectProps<any> = field['ui:options'];
 
   return formItemWrapper(() => <TreeSelect {...schemaOptions} />, field);
@@ -205,19 +180,17 @@ const mergeSchema = (schema: IEditSchemaProps, uiSchema: any) => {
       uiSchemaProperty['ui:rules'] = [];
     }
     if (uiSchemaProperty['ui:formItemConfig'] === undefined) {
-      uiSchemaProperty['ui:formItemConfig'] = undefined;
+      uiSchemaProperty['ui:formItemConfig'] = {};
     }
     // merge description
     // 合并 description ['ui:formItemConfig']['extra'] 额外的描述（如input框中额外的表述字样）
     if (uiSchemaProperty['ui:formItemConfig'].extra === undefined) {
       // 优先合并uiSchemaProperty['ui:description']描述
-      uiSchemaProperty['ui:formItemConfig'].extra =
-        uiSchemaProperty['ui:description'];
+      uiSchemaProperty['ui:formItemConfig'].extra = uiSchemaProperty['ui:description'];
     }
     // 合并 title 综上
     if (uiSchemaProperty['ui:formItemConfig'].label === undefined) {
-      uiSchemaProperty['ui:formItemConfig'].label =
-        uiSchemaProperty['ui:title'];
+      uiSchemaProperty['ui:formItemConfig'].label = uiSchemaProperty['ui:title'];
     }
     if (uiSchemaProperty['ui:formItemConfig'].label === undefined) {
       uiSchemaProperty['ui:formItemConfig'].label = schemaProperty.title;
@@ -270,7 +243,7 @@ const getTreeSelectRemoteData = (id: string, field: IUIEditSchemaProps) => {
 
 // 部件的数据远程获取
 const getRemoteData = async (id: string, uiSchema: any) => {
-  console.log('getRemoteData');
+  // console.log('getRemoteData');
   const calls: any[] = [];
   Object.keys(uiSchema).forEach((key) => {
     const field = uiSchema[key];

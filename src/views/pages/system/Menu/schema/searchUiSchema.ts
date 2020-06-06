@@ -1,4 +1,4 @@
-export default {
+const searchUiSchema: { [index: string]: any } = {
   title: {
     'ui:widget': 'input',
     'ui:options': {
@@ -10,3 +10,5 @@ export default {
     'ui:description': '',
   },
 };
+
+export default searchUiSchema;

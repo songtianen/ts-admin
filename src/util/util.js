@@ -139,10 +139,7 @@ const iconTreeData = (data) => {
         params[i].key = params[i].icon;
         params[i].title = (
           <span>
-            <MyIcon
-              type={params[i].icon}
-              style={{ fontSize: '16px', color: '#0070CC' }}
-            />
+            <MyIcon type={params[i].icon} style={{ fontSize: '16px', color: '#0070CC' }} />
             &nbsp;&nbsp;{params[i].icon}
           </span>
         );
@@ -341,6 +338,18 @@ const accessMenuTree = (menus) => {
   };
   return build(rootMenu, menus);
 };
+const addKeyforArray = (arr) => {
+  const addkey = (_arr) => {
+    for (let i = 0, len = _arr.length; i < len; i++) {
+      _arr[i].key = _arr[i].id;
+      if (_arr[i].children && _arr[i].children.length) {
+        addkey(_arr[i].children);
+      }
+    }
+  };
+  addkey(arr);
+  return arr;
+};
 
 export default {
   findInModuleList,
@@ -359,6 +368,7 @@ export default {
   getTreeEleByPropertyValue,
   getMenuByName,
   accessMenuTree,
+  addKeyforArray,
 };
 
 export function formatDateTime(inputTime) {

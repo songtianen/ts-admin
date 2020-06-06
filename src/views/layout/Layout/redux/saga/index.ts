@@ -21,10 +21,7 @@ function* initAppData(action: ILayOutActionsTypes): SagaReturnType<any> {
   try {
     // const userInfo = yield call(getUserInfo, '');
     // const accessMenu = yield call(getAccessMenu, '');
-    const [accessMenu, userInfo] = yield Promise.all([
-      getAccessMenu(),
-      getUserInfo(),
-    ]);
+    const [accessMenu, userInfo] = yield Promise.all([getAccessMenu(), getUserInfo()]);
     if (userInfo.statusCode === 200 && accessMenu.statusCode === 200) {
       localStorage.setItem('accessMenu', JSON.stringify(accessMenu.data));
       const menuRes = accessMenu.data;
@@ -36,10 +33,7 @@ function* initAppData(action: ILayOutActionsTypes): SagaReturnType<any> {
       // let menus = JSON.parse(JSON.stringify(menuRes));
       const findModule = util.findCurrentMenuNameAndModule(menuRes, pathName);
       const siderModuleMenu = JSON.parse(JSON.stringify(findModule.children));
-      const siderData = util.findSiderComponentSelectedNameAndOpenKeys(
-        siderModuleMenu,
-        pathName,
-      ); // 查找的Sider组件需要的key和openKeys
+      const siderData = util.findSiderComponentSelectedNameAndOpenKeys(siderModuleMenu, pathName); // 查找的Sider组件需要的key和openKeys
       const accessMenuData = {
         headerCurrentModuleName: findModule.name, // header组件数据,当前选中的菜单
         // accessMenu: menuRes, // 所有菜单
@@ -60,10 +54,7 @@ function* initAppData(action: ILayOutActionsTypes): SagaReturnType<any> {
         permission: userInfo.data.userPermission,
         userId: userInfo.data.userId,
       };
-      localStorage.setItem(
-        'permission',
-        JSON.stringify(userInfo.data.userPermission),
-      );
+      localStorage.setItem('permission', JSON.stringify(userInfo.data.userPermission));
       localStorage.setItem('isAdmin', userInfo.data.isAdmin);
       const appData = {
         ...userInfoData,

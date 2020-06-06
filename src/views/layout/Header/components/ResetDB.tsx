@@ -7,9 +7,11 @@ const FormItem = Form.Item;
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IResetDBProps {
   // theme: 'dark' | 'light' | undefined;
+  responsive: boolean;
 }
 
-const ResetDB: React.FunctionComponent<IResetDBProps> = () => {
+const ResetDB: React.FunctionComponent<IResetDBProps> = (props) => {
+  const { responsive } = props;
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const handleSubmit = async (values: any) => {
@@ -42,7 +44,11 @@ const ResetDB: React.FunctionComponent<IResetDBProps> = () => {
     <div>
       <MyIcon
         type='icon-database'
-        style={{ fontSize: 16, color: '#08c' }}
+        style={{
+          fontSize: 16,
+          color: '#08c',
+          display: responsive ? 'none' : 'block',
+        }}
         onClick={iconClick}
       />
       <Modal

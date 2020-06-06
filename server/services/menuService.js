@@ -11,9 +11,7 @@ const buildMenu = (menus) => {
   const build = (listItem, allList) => {
     for (let i = 0; i < listItem.length; i++) {
       listItem[i].children = [];
-      const children = allList.filter(
-        (item) => item.parentId === listItem[i].id,
-      );
+      const children = allList.filter((item) => item.parentId === listItem[i].id);
       listItem[i].children.push(...children);
       if (listItem[i].children) {
         build(listItem[i].children, allList);
@@ -75,9 +73,7 @@ const buildAccessMenu = (menus, userPermissionIds) => {
     const build = (listItem, allList) => {
       for (let i = 0; i < listItem.length; i++) {
         listItem[i].children = [];
-        const children = allList.filter(
-          (item) => item.parentId === listItem[i].id,
-        );
+        const children = allList.filter((item) => item.parentId === listItem[i].id);
         listItem[i].children.push(...children);
         if (listItem[i].children) {
           build(listItem[i].children, allList);
@@ -128,9 +124,7 @@ const buildMenuTreeWithFunction = (menu, funcList) => {
   const build = (listItem, allList) => {
     for (let i = 0; i < listItem.length; i++) {
       listItem[i].children = [];
-      const children = allList.filter(
-        (item) => item.parentId === listItem[i].id,
-      );
+      const children = allList.filter((item) => item.parentId === listItem[i].id);
       listItem[i].children.push(...children);
       if (listItem[i].children) {
         build(listItem[i].children, allList);
@@ -154,19 +148,13 @@ const menuService = {
     menuLists = JSON.parse(JSON.stringify(menuLists));
     const allList = JSON.parse(JSON.stringify(menuLists));
     if (filter.functionCode) {
-      menuLists = _.filter(
-        menuLists,
-        (o) => o.functionCode.indexOf(filter.functionCode) > -1,
-      );
+      menuLists = _.filter(menuLists, (o) => o.functionCode.indexOf(filter.functionCode) > -1);
     }
     if (filter.title) {
-      menuLists = _.filter(
-        menuLists,
-        (o) => o.title.indexOf(filter.title) > -1,
-      );
+      menuLists = _.filter(menuLists, (o) => o.title.indexOf(filter.title) > -1);
     }
 
-    // 总页数
+    // 总数
     const totalCount = menuLists.length;
     // 排序
     if (sortBy) {

@@ -1,4 +1,4 @@
-export default {
+const searchSchema = {
   $id: 'menu-search-schema',
   title: 'menu-search-schema',
   description: 'menu-search-schema.',
@@ -12,5 +12,8 @@ export default {
   },
   formLayout: {
     layout: 'inline',
+    labelCol: { span: 4 },
+    wrapperCol: { span: 10 },
   },
 };
+export default searchSchema;

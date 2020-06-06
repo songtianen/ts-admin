@@ -3,11 +3,11 @@ import { Form } from 'antd';
 import getForm from './util/commonFormSchemaUtil';
 import { IEditSchemaProps } from './util/type';
 
-interface ICommoFormProps {
+export interface ICommoFormProps {
   schema: IEditSchemaProps;
   uiSchema: any;
   formData?: any;
-  handleFormInstance?: (values: any) => void;
+  handleFormInstance: (values: any) => void;
 }
 
 const CommoForm: React.FunctionComponent<ICommoFormProps> = (props) => {
@@ -20,10 +20,10 @@ const CommoForm: React.FunctionComponent<ICommoFormProps> = (props) => {
     if (handleFormInstance) {
       handleFormInstance(form);
     }
-  }, []);
+  });
 
   return (
-    <Form layout={formLayout} initialValues={formData} form={form}>
+    <Form {...formLayout} initialValues={formData} form={form}>
       <EhanceForm />
     </Form>
   );

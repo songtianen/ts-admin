@@ -6,8 +6,8 @@ import CommonForm from '../Form';
 import { IEditSchemaProps } from '../Form/util/type';
 
 export interface IModalFormProps {
-  editSchema: IEditSchemaProps;
-  editUiSchema: any;
+  schema: IEditSchemaProps;
+  uiSchema: any;
   formData?: any;
   visible: boolean;
   cancelText: string;
@@ -20,8 +20,8 @@ export interface IModalFormProps {
 
 const ModalForm: React.FunctionComponent<IModalFormProps> = (props) => {
   const {
-    editSchema,
-    editUiSchema,
+    schema,
+    uiSchema,
     formData,
     visible,
     cancelText,
@@ -29,7 +29,6 @@ const ModalForm: React.FunctionComponent<IModalFormProps> = (props) => {
     title,
     onCancel,
     destroyOnClose,
-    children,
     modalSubmit,
   } = props;
   let FormIns: FormInstance;
@@ -40,27 +39,24 @@ const ModalForm: React.FunctionComponent<IModalFormProps> = (props) => {
   };
 
   return (
-    <div>
-      <Modal
-        visible={visible}
-        cancelText={cancelText}
-        okText={okText}
-        title={title}
-        onCancel={onCancel}
-        onOk={handleModalSunbmit}
-        destroyOnClose={destroyOnClose}
-      >
-        <CommonForm
-          schema={editSchema}
-          uiSchema={editUiSchema}
-          formData={formData}
-          handleFormInstance={(formIns) => {
-            FormIns = formIns;
-          }}
-        />
-      </Modal>
-      {children}
-    </div>
+    <Modal
+      visible={visible}
+      cancelText={cancelText}
+      okText={okText}
+      title={title}
+      onCancel={onCancel}
+      onOk={handleModalSunbmit}
+      destroyOnClose={destroyOnClose}
+    >
+      <CommonForm
+        schema={schema}
+        uiSchema={uiSchema}
+        formData={formData}
+        handleFormInstance={(formIns) => {
+          FormIns = formIns;
+        }}
+      />
+    </Modal>
   );
 };
 export default ModalForm;

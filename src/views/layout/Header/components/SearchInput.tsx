@@ -4,26 +4,25 @@ import * as React from 'react';
 import { Input } from 'antd';
 import MyICon from '../../../components/MyIcon';
 
-interface ISearchInputProps {}
+const { Search } = Input;
+
+interface ISearchInputProps {
+  responsive: boolean;
+}
 
 const SearchInput: React.FunctionComponent<ISearchInputProps> = (props) => {
+  const { responsive } = props;
   const [focus, setFocus] = React.useState(false);
   const [value, setValue] = React.useState('');
 
   return (
-    <Input
-      placeholder='Search'
-      style={{ border: 'none', width: 150 }}
-      size='small'
-      prefix={
-        focus ? (
-          <MyICon type='icon-arrowleft' />
-        ) : (
-          <MyICon type='icon-search' style={{ fontSize: 14, color: '#aaa' }} />
-        )
-      }
-      value={value}
-    />
+    <div
+      style={{
+        display: responsive ? 'none' : 'block',
+      }}
+    >
+      <Search placeholder='Search' size='small' value={value} />
+    </div>
   );
 };
 

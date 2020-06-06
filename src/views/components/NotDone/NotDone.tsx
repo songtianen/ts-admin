@@ -33,8 +33,8 @@ const NotDone: React.FunctionComponent<ICommonModalProps> = () => {
         onCancel={controlVisble.onCancel}
         modalSubmit={modalSubmit}
         destroyOnClose={destroyOnClose}
-        editSchema={schema.editSchema}
-        editUiSchema={schema.editUiSchema}
+        schema={schema.editSchema}
+        uiSchema={schema.editUiSchema}
         formData={{ path: '/////' }}
       />
 

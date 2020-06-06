@@ -148,7 +148,6 @@ const MyContent: React.FunctionComponent<IMyContentProps> = (props) => {
     });
   };
 
-  console.log('MyContent-Render');
   const renderTabBar = (pro: any, DefaultTabBar: any) => {
     return (
       <DefaultTabBar
@@ -164,7 +163,7 @@ const MyContent: React.FunctionComponent<IMyContentProps> = (props) => {
       />
     );
   };
-
+  console.log('MyContent-Render');
   return (
     <Tabs
       hideAdd

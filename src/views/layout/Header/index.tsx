@@ -61,6 +61,7 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
           display: 'flex',
           border: 'none',
           width: '180px',
+          height: '100%',
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -89,8 +90,8 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
       </Menu>
       <div
         style={{
-          flex: 2,
-          minWidth: '100px',
+          flex: 3,
+          minWidth: '200px',
         }}
       >
         {moduleListLen ? (
@@ -109,7 +110,6 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
         style={{
           flex: 2,
           border: 'none',
-          display: responsive ? 'none' : 'block',
         }}
       >
         <div
@@ -121,7 +121,7 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
             justifyContent: 'space-around',
           }}
         >
-          <SearchInput />
+          <SearchInput responsive={responsive} />
           <a href='https://github.com/songtianen'>
             <MyIcon
               type='icon-github-fill'
@@ -131,7 +131,7 @@ const MyHeader: React.FunctionComponent<IHeaderProps> = (props) => {
             />
           </a>
           <FullScreen />
-          <ResetDB />
+          <ResetDB responsive={responsive} />
         </div>
       </Menu>
       <div

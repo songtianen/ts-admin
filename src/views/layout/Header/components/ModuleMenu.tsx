@@ -41,9 +41,8 @@ const ModuleMenu: React.FunctionComponent<IModuleMenuProps> = (props) => {
     <Menu
       mode='horizontal'
       style={{
-        height: '100%',
         display: 'flex',
-        justifyContent: 'center',
+        height: '100%',
         alignItems: 'center',
         border: 'none',
       }}
