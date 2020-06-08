@@ -11,9 +11,7 @@ const useDocAndHTML = (props: IUseDocAndHTMLProps) => {
     if (docTilte) {
       document.title = docTilte;
     }
-    const StartLogin: HTMLElement | null = document.getElementById(
-      'StartLoading',
-    );
+    const StartLogin: HTMLElement | null = document.getElementById('StartLoading');
     if (StartLogin) {
       document.body.removeChild(StartLogin);
     }

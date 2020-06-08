@@ -100,18 +100,12 @@ const FullScreen: React.FunctionComponent<IFullScreenProps> = (props) => {
       {isfullScreen ? (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div onClick={handleFullscreen}>
-          <MyIcon
-            type='icon-fullscreen-exit'
-            style={{ fontSize: 14, fontWeight: 'bold' }}
-          />
+          <MyIcon type='icon-fullscreen-exit' style={{ fontSize: 14, fontWeight: 'bold' }} />
         </div>
       ) : (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div onClick={handleFullscreen}>
-          <MyIcon
-            type='icon-fullscreen'
-            style={{ fontSize: 14, fontWeight: 'bold' }}
-          />
+          <MyIcon type='icon-fullscreen' style={{ fontSize: 14, fontWeight: 'bold' }} />
         </div>
       )}
     </>

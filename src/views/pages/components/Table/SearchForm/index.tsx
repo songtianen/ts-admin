@@ -17,7 +17,7 @@ const SearchForm: React.FunctionComponent<ISearchFormProps> = (props) => {
   let FormIns: FormInstance;
 
   const handleSubmit = () => {
-    console.log('FormInstance', FormIns);
+    // console.log('FormInstance', FormIns);
 
     FormIns.validateFields().then((values) => {
       onSubmmit(values);

@@ -13,14 +13,13 @@ import {
   useTablePaginationHook,
   useTableFilterHook,
   useTableSelectedRowKeysHook,
-  useQueryHook,
   useSorterHook,
   useTablePagedListHook,
   useIsEditModalHook,
   useEditModalVisibleHook,
   useTableLoadingClickHook,
   useEditFormDataHook,
-} from '../hooks/systemTableHook';
+} from '../hooks/systemStateHook';
 
 const Menu: React.FunctionComponent = () => {
   const { tableFilter, changeTableFilter } = useTableFilterHook({
@@ -31,7 +30,7 @@ const Menu: React.FunctionComponent = () => {
   const [tablePagination, changeTablePagination] = useTablePaginationHook();
   const { tableSelectedRowKeys, changeTableSelectedRowKeys } = useTableSelectedRowKeysHook();
   const { tablePagedList, changeTablePagelist } = useTablePagedListHook();
-  const { tableQuery, changeQuery } = useQueryHook();
+  // const { tableQuery, changeQuery } = useQueryHook();
   const { editModalVisible, changeEditModalVisible } = useEditModalVisibleHook();
   const { isEditModal, changeIsEditModal } = useIsEditModalHook();
   const { tableSorter, changeSoter } = useSorterHook();

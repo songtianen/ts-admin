@@ -26,8 +26,10 @@ import {
 function* fetchUser(action: ILoginActionsType['ILogin']) {
   try {
     yield put({ type: BEFORE_LOGIN, payload: {} });
-    const userInfo: AxiosResponse<IResponsetLoginByUsernameData> &
-      IResponseServerStatus = yield call(loginByUsername, action.payload);
+    const userInfo: AxiosResponse<IResponsetLoginByUsernameData> & IResponseServerStatus = yield call(
+      loginByUsername,
+      action.payload,
+    );
     if (userInfo.statusCode === 200 && userInfo.data.accessToken) {
       const token = userInfo.data.accessToken;
       const setTokens = (_token: string) => {
@@ -59,8 +61,10 @@ function* fetchUser(action: ILoginActionsType['ILogin']) {
 function* register(action: ILoginActionsType['IRegister']) {
   try {
     yield put({ type: BEFORE_LOGIN, payload: {} });
-    const userInfo: AxiosResponse<IResponsetloginRegisterData> &
-      IResponseServerStatus = yield call(loginRegister, action.payload);
+    const userInfo: AxiosResponse<IResponsetloginRegisterData> & IResponseServerStatus = yield call(
+      loginRegister,
+      action.payload,
+    );
     if (userInfo.statusCode === 200 && userInfo.data.accessToken) {
       setToken(userInfo.data.accessToken);
       yield put({ type: REGISTER_SUCCESS, payload: userInfo });

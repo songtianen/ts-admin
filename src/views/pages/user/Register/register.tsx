@@ -62,11 +62,7 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
   console.log('register-Render');
   return (
     <UserFormWarp>
-      <Form
-        {...formItemLayout}
-        onFinish={handleSubmit}
-        onFinishFailed={onFinishFailed}
-      >
+      <Form {...formItemLayout} onFinish={handleSubmit} onFinishFailed={onFinishFailed}>
         <Form.Item
           // {...tailFormItemLayout}
           label='用户名'
@@ -77,9 +73,7 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input
-            prefix={
-              <MyIcon type='icon-user' style={{ color: 'rgba(0,0,0,.25)' }} />
-            }
+            prefix={<MyIcon type='icon-user' style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder='用户名'
           />
         </Form.Item>
@@ -92,9 +86,7 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input
-            prefix={
-              <MyIcon type='icon-mail' style={{ color: 'rgba(0,0,0,.25)' }} />
-            }
+            prefix={<MyIcon type='icon-mail' style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder='邮箱'
           />
         </Form.Item>
@@ -110,9 +102,7 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input.Password
-            prefix={
-              <MyIcon type='icon-lock' style={{ color: 'rgba(0,0,0,.25)' }} />
-            }
+            prefix={<MyIcon type='icon-lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder='密码'
             visibilityToggle
           />
@@ -148,9 +138,7 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           ]}
         >
           <Input
-            prefix={
-              <MyIcon type='icon-mobile' style={{ color: 'rgba(0,0,0,.25)' }} />
-            }
+            prefix={<MyIcon type='icon-mobile' style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder='手机号'
             style={{ width: '100%' }}
           />

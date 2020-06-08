@@ -4,9 +4,7 @@ export interface IPermissionContainerProps {
   permission: string[];
 }
 // 组件级权限效验
-class PermissionContainer extends React.PureComponent<
-  IPermissionContainerProps
-> {
+class PermissionContainer extends React.PureComponent<IPermissionContainerProps> {
   render() {
     // eslint-disable-next-line react/prop-types
     const { permission, children } = this.props;

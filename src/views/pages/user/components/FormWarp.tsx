@@ -28,11 +28,7 @@ const UserFormWarp: React.FunctionComponent<IUserFormWarpProps> = (props) => {
         <div className='login-bottom'>
           <div className='login-rigster-btn'>
             {btn?.hasBtn ? (
-              <Button
-                type='primary'
-                style={btn.btnStyle}
-                onClick={btn.btnClick}
-              >
+              <Button type='primary' style={btn.btnStyle} onClick={btn.btnClick}>
                 {btn.btnContent}
               </Button>
             ) : (
@@ -41,18 +37,9 @@ const UserFormWarp: React.FunctionComponent<IUserFormWarpProps> = (props) => {
           </div>
           <div className='login-rigster-meta'>
             <Meta
-              avatar={
-                <MyIcon
-                  type='icon-github'
-                  style={{ fontSize: '22px', color: '#1890FF' }}
-                />
-              }
+              avatar={<MyIcon type='icon-github' style={{ fontSize: '22px', color: '#1890FF' }} />}
               title={
-                <a
-                  href='https://github.com/songtianen'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
+                <a href='https://github.com/songtianen' target='_blank' rel='noopener noreferrer'>
                   AU-admin
                 </a>
               }

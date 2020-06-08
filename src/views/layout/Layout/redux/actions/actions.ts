@@ -31,9 +31,7 @@ export interface IGetAccessMenuSuccessAction {
   payload: any;
   type: UPDATE_ACCESSMENU_SUCCESS;
 }
-export const getAccessMenuSuccessAction = (
-  data: any,
-): IGetAccessMenuSuccessAction => {
+export const getAccessMenuSuccessAction = (data: any): IGetAccessMenuSuccessAction => {
   return { type: UPDATE_ACCESSMENU_SUCCESS, payload: data };
 };
 // ---
@@ -50,9 +48,7 @@ export interface IUpdateModuleSucessAction {
   payload: any;
   type: UPDATE_MODULE_SUCCESS;
 }
-export const updateModuleSucessAction = (
-  data: any,
-): IUpdateModuleSucessAction => {
+export const updateModuleSucessAction = (data: any): IUpdateModuleSucessAction => {
   return { type: UPDATE_MODULE_SUCCESS, payload: data };
 };
 // ---
@@ -77,9 +73,7 @@ export interface IInitAppDataSuccessAction {
   payload: any;
   type: INIT_APPDATA_SUCCESS;
 }
-export const initAppDataSuccessAction = (
-  data: any,
-): IInitAppDataSuccessAction => {
+export const initAppDataSuccessAction = (data: any): IInitAppDataSuccessAction => {
   return { type: INIT_APPDATA_SUCCESS, payload: data };
 };
 // userActions

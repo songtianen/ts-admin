@@ -32,20 +32,14 @@ const MyContent: React.FunctionComponent<IMyContentProps> = (props) => {
   // console.log('location--', location.pathname);
 
   if (moduleList.length) {
-    const pageModule = util.findInModuleList(
-      moduleList,
-      'path',
-      location.pathname,
-    );
+    const pageModule = util.findInModuleList(moduleList, 'path', location.pathname);
     if (!pageModule.length) {
       return <div>404</div>;
     }
     const currentPage = pageModule[0];
     // console.log('d昂', currentPage);
     // 查看打开的page中有没有当前的页面数据
-    const isInOpenPages = openPages.some(
-      (s: any) => s.name === currentPage.name,
-    );
+    const isInOpenPages = openPages.some((s: any) => s.name === currentPage.name);
     if (!isInOpenPages) {
       // 当前打开开的页面中没有这个页面
       const newOpenPage = {
@@ -127,9 +121,7 @@ const MyContent: React.FunctionComponent<IMyContentProps> = (props) => {
   const renderTabPane = () => {
     return openPages.map((item: IMyContentOpenPages) => {
       /* 后端返回的name属性，前端还没有开发这个页面，返回图标页面 */
-      const Page = MenuMapToComponent[item.name]
-        ? MenuMapToComponent[item.name]
-        : MenuMapToComponent.notdone; // 如果前端本地没有这个页面
+      const Page = MenuMapToComponent[item.name] ? MenuMapToComponent[item.name] : MenuMapToComponent.notdone; // 如果前端本地没有这个页面
       return (
         <TabPane
           tab={item.title}

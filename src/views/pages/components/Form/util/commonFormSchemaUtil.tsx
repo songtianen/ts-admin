@@ -209,36 +209,42 @@ const mergeSchema = (schema: IEditSchemaProps, uiSchema: any) => {
 const getCascaderRemoteData = (id: string, field: IUIEditSchemaProps) => {
   // 获取请求接口
   const { apiKey } = field['ui:remoteConfig'];
-  return new Promise((resolve) => {
-    myapi[apiKey]().then((res: any) => {
-      let { data } = res;
-      // 返回经过 uiSchema 配置文件处理的数据
-      data = field['ui:remoteConfig'].hand(data);
-      // 给配置文件添加此数据
-      field['ui:options'].options = data;
-      // 缓存数据
-      remoteDataUtil.addData(`${id}_${field.key}`, data);
-      resolve(data);
+  if (apiKey) {
+    return new Promise((resolve) => {
+      myapi[apiKey]().then((res: any) => {
+        let { data } = res;
+        // 返回经过 uiSchema 配置文件处理的数据
+        data = field['ui:remoteConfig'].hand(data);
+        // 给配置文件添加此数据
+        field['ui:options'].options = data;
+        // 缓存数据
+        remoteDataUtil.addData(`${id}_${field.key}`, data);
+        resolve(data);
+      });
     });
-  });
+  }
+  return null;
 };
 // treeData 远程数据
 const getTreeSelectRemoteData = (id: string, field: IUIEditSchemaProps) => {
   // console.log('field.keyfield.keyfield.key', field);
   // 获取请求接口
   const { apiKey } = field['ui:remoteConfig'];
-  return new Promise((resolve) => {
-    myapi[apiKey]().then((res: any) => {
-      let { data } = res;
-      // 返回经过 uiSchema 配置文件处理的数据
-      data = field['ui:remoteConfig'].hand(data);
-      // 给配置文件添加此数据
-      field['ui:options'].treeData = data;
-      // 缓存数据
-      remoteDataUtil.addData(`${id}_${field.key}`, data);
-      resolve(data);
+  if (apiKey) {
+    return new Promise((resolve) => {
+      myapi[apiKey]().then((res: any) => {
+        let { data } = res;
+        // 返回经过 uiSchema 配置文件处理的数据
+        data = field['ui:remoteConfig'].hand(data);
+        // 给配置文件添加此数据
+        field['ui:options'].treeData = data;
+        // 缓存数据
+        remoteDataUtil.addData(`${id}_${field.key}`, data);
+        resolve(data);
+      });
     });
-  });
+  }
+  return null;
 };
 
 // 部件的数据远程获取

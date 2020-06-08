@@ -18,11 +18,7 @@ export default function Footer(props: IFooterProps) {
           fontSize: '12px',
         }}
       >
-        <a
-          href='https://github.com/songtianen'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
+        <a href='https://github.com/songtianen' target='_blank' rel='noopener noreferrer'>
           AU-admin&nbsp;&nbsp;&nbsp;&nbsp;
           <MyIcon type='icon-github-fill' />
         </a>
@@ -49,11 +45,7 @@ export default function Footer(props: IFooterProps) {
             fontSize: '12px',
           }}
         >
-          <a
-            href='https://github.com/songtianen'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <a href='https://github.com/songtianen' target='_blank' rel='noopener noreferrer'>
             AU-admin&nbsp;&nbsp;&nbsp;&nbsp;
             <MyIcon type='icon-github-fill' />
           </a>

@@ -68,15 +68,9 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
     const prevPathname = prevProps.location.pathname;
     if (thisPathname !== prevPathname) {
       const { moduleList, dispatch, siderOpenKeys } = this.props;
-      const findModule = util.findCurrentMenuNameAndModule(
-        moduleList,
-        thisPathname,
-      );
+      const findModule = util.findCurrentMenuNameAndModule(moduleList, thisPathname);
       const siderModuleMenu = JSON.parse(JSON.stringify(findModule.children));
-      const siderData = util.findSiderComponentSelectedNameAndOpenKeys(
-        siderModuleMenu,
-        thisPathname,
-      ); // 查找的Sider组件需要的key和openKeys
+      const siderData = util.findSiderComponentSelectedNameAndOpenKeys(siderModuleMenu, thisPathname); // 查找的Sider组件需要的key和openKeys
       dispatch(
         updateModuleAction({
           siderModuleMenu: findModule.children,
@@ -144,22 +138,12 @@ class MyLayout extends React.PureComponent<IProps, ILayoutState> {
 
   render() {
     const { siderModuleMenu } = this.props;
-    const {
-      responsive,
-      collapsed,
-      navTabShow,
-      headerItemDisplay,
-      layOutHeight,
-    } = this.state;
+    const { responsive, collapsed, navTabShow, headerItemDisplay, layOutHeight } = this.state;
     const { theme } = this.props;
     console.log('Layout-rnder');
     return (
       <Layout style={{ height: layOutHeight }}>
-        <MyHeader
-          toggle={this.toggle}
-          navTabshow={navTabShow}
-          responsive={responsive}
-        />
+        <MyHeader toggle={this.toggle} navTabshow={navTabShow} responsive={responsive} />
         <Layout>
           <Sider
             breakpoint='md'

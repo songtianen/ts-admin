@@ -191,6 +191,26 @@ export const useEditFormDataHook = (initialValue?: editFormData) => {
     changeIsEditFormData,
   };
 };
+export interface IuseFetchAPIProps {
+  // [index: string]: any;
+  findlApi?: string;
+  addApi?: string;
+  editApi?: string;
+  delApi?: string;
+  modalApis?: string[];
+  toolApis?: string[];
+  initialApis?: string[];
+}
+export const useFetchAPIHook = (initialValue?: IuseFetchAPIProps) => {
+  const [apis, setApis] = React.useState(initialValue || {});
+  const changeFetchAPI = (val: IuseFetchAPIProps) => {
+    setApis(val);
+  };
+  return {
+    apis,
+    changeFetchAPI,
+  };
+};
 
 export interface IuseFetchHookProps {
   pageIndex?: number;

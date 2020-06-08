@@ -51,13 +51,7 @@ const ResetDB: React.FunctionComponent<IResetDBProps> = (props) => {
         }}
         onClick={iconClick}
       />
-      <Modal
-        visible={modalVisible}
-        title='重置数据库'
-        onCancel={modalOnCancel}
-        footer={null}
-        destroyOnClose
-      >
+      <Modal visible={modalVisible} title='重置数据库' onCancel={modalOnCancel} footer={null} destroyOnClose>
         <Form onFinish={handleSubmit}>
           <FormItem
             name='password'
@@ -68,9 +62,7 @@ const ResetDB: React.FunctionComponent<IResetDBProps> = (props) => {
             ]}
           >
             <Input.Password
-              prefix={
-                <MyIcon type='icon-lock' style={{ color: 'rgba(0,0,0,.25)' }} />
-              }
+              prefix={<MyIcon type='icon-lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
               type='password'
               placeholder='请输入密码'
             />

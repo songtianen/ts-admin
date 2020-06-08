@@ -50,9 +50,7 @@ const Sider: React.FunctionComponent<ISiderProps> = (props) => {
       >
         {item.children &&
           item.children.map((_item: any) =>
-            _item.children && _item.children.length
-              ? renderSubMenu(_item)
-              : renderMenuItem(_item),
+            _item.children && _item.children.length ? renderSubMenu(_item) : renderMenuItem(_item),
           )}
       </SubMenu>
     );
@@ -82,9 +80,7 @@ const Sider: React.FunctionComponent<ISiderProps> = (props) => {
     >
       {siderModuleMenuLen ? (
         siderModuleMenu.map((item) =>
-          item.children && item.children.length
-            ? renderSubMenu(item)
-            : renderMenuItem(item),
+          item.children && item.children.length ? renderSubMenu(item) : renderMenuItem(item),
         )
       ) : (
         <Loadble num={7} />

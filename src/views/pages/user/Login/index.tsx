@@ -85,9 +85,7 @@ const Login: FC<ILoginProps> = (props) => {
         onFinishFailed={onFinishFailed}
       >
         用户名：
-        <span style={{ backgroundColor: 'yellow' }}>
-          admin/admin2/HR/CTO/CFO/CMO
-        </span>
+        <span style={{ backgroundColor: 'yellow' }}>admin/admin2/HR/CTO/CFO/CMO</span>
         <Form.Item
           // label='Username'
           name='username'
@@ -99,9 +97,7 @@ const Login: FC<ILoginProps> = (props) => {
             },
           ]}
         >
-          <Input
-            prefix={<MyIcon type='icon-user' style={{ color: '#aaa' }} />}
-          />
+          <Input prefix={<MyIcon type='icon-user' style={{ color: '#aaa' }} />} />
         </Form.Item>
         <Form.Item
           // label='Password'
