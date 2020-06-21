@@ -350,7 +350,18 @@ const addKeyforArray = (arr) => {
   addkey(arr);
   return arr;
 };
-
+const debounce = function (fn, ms) {
+  let timer;
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fn(...args);
+      timer = null;
+    }, ms);
+  };
+};
 export default {
   findInModuleList,
   findSiderComponentSelectedNameAndOpenKeys,
@@ -369,6 +380,7 @@ export default {
   getMenuByName,
   accessMenuTree,
   addKeyforArray,
+  debounce,
 };
 
 export function formatDateTime(inputTime) {

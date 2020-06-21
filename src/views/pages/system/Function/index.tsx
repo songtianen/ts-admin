@@ -165,8 +165,8 @@ const Function: React.FunctionComponent = () => {
         addFunc: myTableHeaderToolAddFunc,
         onConfirm: onTableHeaderToolonConfirm,
         hasSelected: tableHasSelected,
-        addPermission: ['menu_add'],
-        delPermission: ['menu_del'],
+        addPermission: ['function_add'],
+        delPermission: ['function_del'],
       }}
       tableOption={{
         columns,

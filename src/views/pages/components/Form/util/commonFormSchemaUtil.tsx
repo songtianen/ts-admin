@@ -12,8 +12,10 @@ import {
   Cascader,
   Upload,
   TreeSelect,
+  Tree,
 } from 'antd';
 import { TreeSelectProps } from 'antd/lib/tree-select';
+import { TreeProps } from 'antd/lib/tree';
 import * as api from '../../../../../api';
 import remoteDataUtil from './FormRemoteDataUtil';
 import { IEditSchemaProps, IUIEditSchemaProps } from './type';
@@ -170,6 +172,11 @@ const transformTreeSelect = (field: IUIEditSchemaProps, schemaProperty?: any) =>
 
   return formItemWrapper(() => <TreeSelect {...schemaOptions} />, field);
 };
+const transformTree = (field: IUIEditSchemaProps, schemaProperty?: any) => {
+  const schemaOptions: TreeProps = field['ui:options'];
+
+  return formItemWrapper(() => <Tree {...schemaOptions} />, field);
+};
 // -------
 const mergeSchema = (schema: IEditSchemaProps, uiSchema: any) => {
   Object.keys(uiSchema).forEach((key) => {
@@ -246,6 +253,25 @@ const getTreeSelectRemoteData = (id: string, field: IUIEditSchemaProps) => {
   }
   return null;
 };
+const getTreeRemoteData = (id: string, field: IUIEditSchemaProps) => {
+  // 获取请求接口
+  const { apiKey } = field['ui:remoteConfig'];
+  if (apiKey) {
+    return new Promise((resolve) => {
+      myapi[apiKey]().then((res: any) => {
+        let { data } = res;
+        // 返回经过 uiSchema 配置文件处理的数据
+        data = field['ui:remoteConfig'].hand(data);
+        // 给配置文件添加此数据
+        field['ui:options'].treeData = data;
+        // 缓存数据
+        remoteDataUtil.addData(`${id}_${field.key}`, data);
+        resolve(data);
+      });
+    });
+  }
+  return null;
+};
 
 // 部件的数据远程获取
 const getRemoteData = async (id: string, uiSchema: any) => {
@@ -275,6 +301,9 @@ const getRemoteData = async (id: string, uiSchema: any) => {
           break;
         case 'treeSelect':
           calls.push(getTreeSelectRemoteData(id, field));
+          break;
+        case 'tree':
+          calls.push(getTreeRemoteData(id, field));
           break;
         default:
           calls.push(getCascaderRemoteData(id, field));
@@ -324,6 +353,9 @@ const parse = (id: string, schema: IEditSchemaProps, uiSchema: any) => {
         break;
       case 'treeSelect':
         items.push(transformTreeSelect(field, schemaProperty));
+        break;
+      case 'tree':
+        items.push(transformTree(field, schemaProperty));
         break;
       default:
         items.push(transformNormal(field, schemaProperty));
