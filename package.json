@@ -103,7 +103,7 @@
     "increase-memory-limit": "^1.0.7",
     "install": "^0.13.0",
     "jest": "^24.7.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "less": "^3.9.0",
     "less-loader": "^6.1.0",
     "lodash": "^4.17.15",
